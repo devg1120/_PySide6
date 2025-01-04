@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>JAL_MainWindow</class>
+ <widget class="QMainWindow" name="JAL_MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>835</width>
+    <height>436</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>0</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>jal</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="maximumSize">
+    <size>
+     <width>16777215</width>
+     <height>16777215</height>
+    </size>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="QSplitter" name="splitter">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <widget class="TabbedMdiArea" name="mdiArea" native="true"/>
+      <widget class="LogViewer" name="Logs"/>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="MainMenu">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>835</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuMain">
+    <property name="title">
+     <string>&amp;Main</string>
+    </property>
+    <addaction name="actionOperations"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menu_Data">
+    <property name="title">
+     <string>&amp;Data</string>
+    </property>
+    <addaction name="separator"/>
+    <addaction name="action_Re_build_Ledger"/>
+    <addaction name="separator"/>
+    <addaction name="actionAccounts"/>
+    <addaction name="actionAssets"/>
+    <addaction name="actionPeers"/>
+    <addaction name="actionCategories"/>
+    <addaction name="actionTags"/>
+    <addaction name="actionQuotes"/>
+    <addaction name="separator"/>
+    <addaction name="actionBaseCurrency"/>
+    <addaction name="separator"/>
+    <addaction name="actionBackup"/>
+    <addaction name="actionRestore"/>
+    <addaction name="separator"/>
+    <addaction name="actionCleanAll"/>
+   </widget>
+   <widget class="QMenu" name="menu_Export">
+    <property name="title">
+     <string>&amp;Export</string>
+    </property>
+    <addaction name="PrepareTaxForms"/>
+    <addaction name="PrepareFlowReport"/>
+   </widget>
+   <widget class="QMenu" name="menuLanguage">
+    <property name="title">
+     <string>L&amp;anguage</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuImport">
+    <property name="title">
+     <string>&amp;Import</string>
+    </property>
+    <widget class="QMenu" name="menuStatement">
+     <property name="title">
+      <string>&amp;Statement</string>
+     </property>
+    </widget>
+    <addaction name="action_LoadQuotes"/>
+    <addaction name="menuStatement"/>
+    <addaction name="actionImportShopReceipt"/>
+   </widget>
+   <widget class="QMenu" name="menuReports">
+    <property name="title">
+     <string>&amp;Reports</string>
+    </property>
+   </widget>
+   <addaction name="menuMain"/>
+   <addaction name="menu_Data"/>
+   <addaction name="menuReports"/>
+   <addaction name="menuImport"/>
+   <addaction name="menu_Export"/>
+   <addaction name="menuLanguage"/>
+  </widget>
+  <widget class="QStatusBar" name="StatusBar"/>
+  <action name="actionExit">
+   <property name="text">
+    <string>&amp;Exit</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::QuitRole</enum>
+   </property>
+  </action>
+  <action name="action_Re_build_Ledger">
+   <property name="text">
+    <string>Re-build &amp;Ledger...</string>
+   </property>
+  </action>
+  <action name="action_LoadQuotes">
+   <property name="text">
+    <string>&amp;Quotes...</string>
+   </property>
+  </action>
+  <action name="actionAccounts">
+   <property name="text">
+    <string>&amp;Accounts</string>
+   </property>
+  </action>
+  <action name="actionAssets">
+   <property name="text">
+    <string>A&amp;ssets</string>
+   </property>
+  </action>
+  <action name="actionPeers">
+   <property name="text">
+    <string>&amp;Peers</string>
+   </property>
+  </action>
+  <action name="actionCategories">
+   <property name="text">
+    <string>&amp;Categories</string>
+   </property>
+  </action>
+  <action name="actionBackup">
+   <property name="text">
+    <string>&amp;Backup...</string>
+   </property>
+  </action>
+  <action name="actionRestore">
+   <property name="text">
+    <string>&amp;Restore...</string>
+   </property>
+  </action>
+  <action name="PrepareTaxForms">
+   <property name="text">
+    <string>Investment &amp;tax report</string>
+   </property>
+  </action>
+  <action name="actionTags">
+   <property name="text">
+    <string>&amp;Tags</string>
+   </property>
+  </action>
+  <action name="actionImportShopReceipt">
+   <property name="text">
+    <string>&amp;Receipt...</string>
+   </property>
+  </action>
+  <action name="actionQuotes">
+   <property name="text">
+    <string>&amp;Quotes</string>
+   </property>
+  </action>
+  <action name="actionOperations">
+   <property name="text">
+    <string>&amp;Operations</string>
+   </property>
+  </action>
+  <action name="PrepareFlowReport">
+   <property name="text">
+    <string>Foreign accounts &amp;flow report</string>
+   </property>
+  </action>
+  <action name="actionBaseCurrency">
+   <property name="text">
+    <string>&amp;Base Currency</string>
+   </property>
+  </action>
+  <action name="actionCleanAll">
+   <property name="text">
+    <string>Clean All</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>LogViewer</class>
+   <extends>QPlainTextEdit</extends>
+   <header>jal/widgets/custom/log_viewer.h</header>
+  </customwidget>
+  <customwidget>
+   <class>TabbedMdiArea</class>
+   <extends>QWidget</extends>
+   <header>jal/widgets/mdi.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

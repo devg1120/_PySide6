@@ -1,0 +1,34 @@
+#!/usr/bin/bash
+/usr/lib/qt6/uic -g python -o ./ui/ui_main_window.py ./ui/main_window.ui
+/usr/lib/qt6/uic -g python -o ./ui/ui_operations_widget.py ./ui/operations_widget.ui
+/usr/lib/qt6/uic -g python -o ./ui/ui_rebuild_window.py ./ui/rebuild_window.ui
+/usr/lib/qt6/uic -g python -o ./ui/ui_update_quotes_window.py ./ui/quotes_update.ui
+/usr/lib/qt6/uic -g python -o ./ui/ui_reference_data_dlg.py ./ui/reference_data_dlg.ui
+/usr/lib/qt6/uic -g python -o ./ui/ui_tax_export_widget.py ./ui/tax_export_widget.ui
+/usr/lib/qt6/uic -g python -o ./ui/ui_flow_export_widget.py ./ui/flow_export_widget.ui
+/usr/lib/qt6/uic -g python -o ./ui/ui_asset_dlg.py ./ui/asset_dlg.ui
+/usr/lib/qt6/uic -g python -o ./ui/ui_select_account_dlg.py ./ui/select_account_dlg.ui
+/usr/lib/qt6/uic -g python -o ./ui/ui_select_reference_dlg.py ./ui/select_reference_dlg.ui
+/usr/lib/qt6/uic -g python -o ./ui/ui_receipt_import_dlg.py ./ui/receipt_import_dlg.ui
+/usr/lib/qt6/uic -g python -o ./ui/ui_login_fns_dlg.py ./ui/login_fns_dlg.ui
+/usr/lib/qt6/uic -g python -o ./ui/ui_login_lidl_plus_dlg.py ./ui/login_lidl_plus_dlg.ui
+/usr/lib/qt6/uic -g python -o ./ui/ui_login_pingo_doce_dlg.py ./ui/login_pingo_doce_dlg.ui
+/usr/lib/qt6/uic -g python -o ./ui/widgets/ui_income_spending_operation.py ./ui/widgets/income_spending_operation.ui
+/usr/lib/qt6/uic -g python -o ./ui/widgets/ui_asset_payment_operation.py ./ui/widgets/asset_payment_operation.ui
+/usr/lib/qt6/uic -g python -o ./ui/widgets/ui_trade_operation.py ./ui/widgets/trade_operation.ui
+/usr/lib/qt6/uic -g python -o ./ui/widgets/ui_transfer_operation.py ./ui/widgets/transfer_operation.ui
+/usr/lib/qt6/uic -g python -o ./ui/widgets/ui_corporate_action_operation.py ./ui/widgets/corporate_action_operation.ui
+/usr/lib/qt6/uic -g python -o ./ui/widgets/ui_term_deposit_operation.py ./ui/widgets/term_deposit_operation.ui
+/usr/lib/qt6/uic -g python -o ./ui/reports/ui_portfolio_report.py ./ui/reports/portfolio_report.ui
+/usr/lib/qt6/uic -g python -o ./ui/reports/ui_tax_estimation.py ./ui/reports/tax_estimation.ui
+/usr/lib/qt6/uic -g python -o ./ui/reports/ui_income_spending_report.py ./ui/reports/income_spending_report.ui
+/usr/lib/qt6/uic -g python -o ./ui/reports/ui_assets_payments_report.py ./ui/reports/assets_payments_report.ui
+/usr/lib/qt6/uic -g python -o ./ui/reports/ui_term_deposits_report.py ./ui/reports/term_deposits_report.ui
+/usr/lib/qt6/uic -g python -o ./ui/reports/ui_account_balance_report.py ./ui/reports/account_balance_report.ui
+/usr/lib/qt6/uic -g python -o ./ui/reports/ui_category_report.py ./ui/reports/category_report.ui
+/usr/lib/qt6/uic -g python -o ./ui/reports/ui_tag_report.py ./ui/reports/tag_report.ui
+/usr/lib/qt6/uic -g python -o ./ui/reports/ui_peer_report.py ./ui/reports/peer_report.ui
+/usr/lib/qt6/uic -g python -o ./ui/reports/ui_deals_report.py ./ui/reports/deals_report.ui
+/usr/lib/qt6/uic -g python -o ./ui/reports/ui_profit_loss_report.py ./ui/reports/profit_loss_report.ui
+
+/usr/lib/qt6/bin/lupdate -no-obsolete jal.pro
