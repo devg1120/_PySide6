@@ -128,7 +128,7 @@ class NodeItem(AbstractNodeItem):
         Args:
             event (QtWidgets.QGraphicsSceneMouseEvent): mouse event.
         """
-        print("NodeItem mousePressEvent")
+        print("node_base2 :NodeItem mousePressEvent")
         if event.button() == QtCore.Qt.LeftButton:
             for p in self._input_items.keys():
                 if p.hovered:

@@ -13,6 +13,7 @@ class _NodeGroupBox(QtWidgets.QGroupBox):
         layout.setSpacing(1)
         self.setTitle(label)
 
+
     def setTitle(self, text):
         margin = (0, 2, 0, 0) if text else (0, 0, 0, 0)
         self.layout().setContentsMargins(*margin)
@@ -92,8 +93,17 @@ class NodeBaseWidget(QtWidgets.QGraphicsProxyWidget):
         super(NodeBaseWidget, self).__init__(parent)
         self.setZValue(Z_VAL_NODE_WIDGET)
         self._name = name
-        self._label = label
+        self._label = label 
         self._node = None
+
+    def mousePressEvent(self, event):
+        print("NodeBaseWidget press")
+
+    #def mouseReleaseEvent(self, event):
+    #    print("node widget release")
+
+    #def mouseMoveEvent(self, event):
+    #    print("NodeBaseWidget move")
 
     def setToolTip(self, tooltip):
         tooltip = tooltip.replace('\n', '<br/>')
@@ -260,6 +270,7 @@ class NodeComboBox(NodeBaseWidget):
         combo.currentIndexChanged.connect(self.on_value_changed)
         combo.clearFocus()
         self.set_custom_widget(combo)
+
 
     @property
     def type_(self):

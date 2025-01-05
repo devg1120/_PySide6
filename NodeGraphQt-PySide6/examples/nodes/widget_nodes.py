@@ -1,4 +1,5 @@
 from NodeGraphQt import BaseNode
+from NodeGraphQt.qgraphics.node_base2 import NodeItem
 
 
 class DropdownMenuNode(BaseNode):
@@ -37,7 +38,7 @@ class TextInputNode(BaseNode):
     NODE_NAME = 'text'
 
     def __init__(self):
-        super(TextInputNode, self).__init__()
+        super(TextInputNode, self).__init__(qgraphics_item=NodeItem)   #GUSA GS
 
         # create input & output ports
         self.add_input('in')
@@ -45,6 +46,8 @@ class TextInputNode(BaseNode):
 
         # create QLineEdit text input widget.
         self.add_text_input('my_input', 'Text Input', tab='widgets')
+
+
 
 
 class CheckboxNode(BaseNode):
