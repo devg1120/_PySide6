@@ -1,5 +1,5 @@
 from NodeGraphQt import BaseNode
-from NodeGraphQt.qgraphics.node_base2 import NodeItem
+from NodeGraphQt.qgraphics.node_base2 import NodeItem  # GUSA GS
 
 
 class DropdownMenuNode(BaseNode):

@@ -126,57 +126,6 @@ class NodeItem(AbstractNodeItem):
         else:
             raise RuntimeError('Node graph layout direction not valid!')
 
-    def hoverEnterEvent(self, event):
-        #print("hoverEnterEvent")
-        pos = event.pos()
-        if self._mani == NodeItem.Manipilate.none:
-        #if True:
-           mani = self.get_manipulation(pos)
-           #print(mani)
-           self._mani = mani
-           if mani == NodeItem.Manipilate.none:
-              self.setCursor(QtGui.Qt.ArrowCursor)
-           elif mani == NodeItem.Manipilate.move:
-              self.setCursor(QtGui.Qt.ArrowCursor)
-           elif mani == NodeItem.Manipilate.resize_l:
-              #self.setCursor(QtGui.Qt.SizeHorCursor)
-              self.setCursor(QtGui.Qt.SizeVerCursor)
-           elif mani == NodeItem.Manipilate.resize_r:
-              self.setCursor(QtGui.Qt.SizeHorCursor)
-        self.update()
-
-    def hoverMoveEvent(self, event):
-        #print("hoverMoveEvent")
-        pos = event.pos()
-        #if self._mani == NodeItem.Manipilate.none:
-        if True:
-           mani = self.get_manipulation(pos)
-           print(mani)
-           self._mani = mani
-           if mani == NodeItem.Manipilate.none:
-              self.setCursor(QtGui.Qt.ArrowCursor)
-           elif mani == NodeItem.Manipilate.move:
-              self.setCursor(QtGui.Qt.ArrowCursor)
-           elif mani == NodeItem.Manipilate.resize_l:
-              self.setCursor(QtGui.Qt.SizeHorCursor)
-              #self.setCursor(QtGui.Qt.SizeVerCursor)
-           elif mani == NodeItem.Manipilate.resize_r:
-              self.setCursor(QtGui.Qt.SizeHorCursor)
-        self.update()
-
-    def hoverLeaveEvent(self, event):
-        #print("hoverLeaveEvent")
-        pos = event.pos()
-        self._mani = NodeItem.Manipilate.none
-
-    def get_manipulation(self, pos):
-          if pos.x() < 12:
-              return NodeItem.Manipilate.resize_l
-          if pos.x() > (self._width - 12):
-              return NodeItem.Manipilate.resize_r
-          else:
-              return NodeItem.Manipilate.move
-
     def mousePressEvent(self, event):
         """
         Re-implemented to ignore event if LMB is over port collision area.
@@ -202,23 +151,52 @@ class NodeItem(AbstractNodeItem):
                     return
         super(NodeItem, self).mousePressEvent(event)
 
+    def hoverEnterEvent(self, pos):
+          print("hoverEnterEvent")
+
+    def hoverMoveEvent(self, pos):
+          print("hoverMoveEvent")
+
+    def hoverLeaveEvent(self, pos):
+          print("hoverLeaveEvent")
+
+    def get_manipulation(self, pos):
+          if pos.x() < 8:
+              return NodeItem.Manipilate.resize_l
+          #if pos.x() > (self.width() - 8):
+          #if pos.x() > (self._width - 8):
+          if pos.x() > (40 - 8):
+              return NodeItem.Manipilate.resize_r
+          else:
+              return NodeItem.Manipilate.move
 
     def mouseMoveEvent(self, event):
-        #print("NodeItem mouseMoveEvent")
-        #pos = event.pos()
+        print("NodeItem mouseMoveEvent")
+        pos = event.pos()
+
         #if self._mani == NodeItem.Manipilate.none:
-        #   mani = self.get_manipulation(pos)
-        #   print(mani)
-        #   self._mani = mani
-        #   if mani == NodeItem.Manipilate.none:
-        #      self.setCursor(QtGui.Qt.ArrowCursor)
-        #   elif mani == NodeItem.Manipilate.move:
-        #      self.setCursor(QtGui.Qt.ArrowCursor)
-        #   elif mani == NodeItem.Manipilate.resize_l:
-        #      self.setCursor(QtGui.Qt.SizeHorCursor)
-        #   elif mani == NodeItem.Manipilate.resize_r:
-        #      self.setCursor(QtGui.Qt.SizeHorCursor)
-        #self.update()
+        #    self.setCursor({
+        #        Manipilate.none: QtGui.Qt.ArrowCursor,
+        #        Manipilate.move: QtGui.Qt.ArrowCursor,
+        #        Manipilate.resize_l: QtGui.Qt.SizeHorCursor,
+        #        Manipilate.resize_r: QtGui.Qt.SizeHorCursor
+        #    }[self.get_manipulation(pos)])
+
+        if self._mani == NodeItem.Manipilate.none:
+        #if True:
+           mani = self.get_manipulation(pos)
+           print(mani)
+           self._mani = mani
+           if mani == NodeItem.Manipilate.none:
+              self.setCursor(QtGui.Qt.ArrowCursor)
+           elif mani == NodeItem.Manipilate.move:
+              self.setCursor(QtGui.Qt.ArrowCursor)
+           elif mani == NodeItem.Manipilate.resize_l:
+              self.setCursor(QtGui.Qt.SizeHorCursor)
+           elif mani == NodeItem.Manipilate.resize_r:
+              self.setCursor(QtGui.Qt.SizeHorCursor)
+
+        self.update()
 
         super(NodeItem, self).mouseMoveEvent(event)
 
@@ -229,7 +207,7 @@ class NodeItem(AbstractNodeItem):
         Args:
             event (QtWidgets.QGraphicsSceneMouseEvent): mouse event.
         """
-        #self._mani = NodeItem.Manipilate.none
+        self._mani = NodeItem.Manipilate.none
         if event.modifiers() == QtCore.Qt.AltModifier:
             event.ignore()
             return

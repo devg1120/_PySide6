@@ -1,0 +1,14 @@
+
+
+
+node size resize
+
+
+_PySide6/NodeGraphQt-PySide6/examples
+   python3 resize_node.py 
+
+
+   source   
+      PySide6/NodeGraphQt-PySide6/NodeGraphQt/qgraphics/node_base2.py
+                         class NodeItem(AbstractNodeItem):
+
