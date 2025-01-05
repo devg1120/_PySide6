@@ -245,6 +245,8 @@ class NodeItem(AbstractNodeItem):
             self._width = self._width - sub.x()
             self.update()
             self._offset = pos
+            height = self._text_item.boundingRect().height() + 4.0
+            self.align_ports(v_offset = height)
             return
         elif self._mani == NodeItem.Manipilate.resize_r:
             print("NodeItem resize_r")
@@ -253,6 +255,8 @@ class NodeItem(AbstractNodeItem):
             self._width = self._width + sub.x()
             self.update()
             self._offset = pos
+            height = self._text_item.boundingRect().height() + 4.0
+            self.align_ports(v_offset = height)
             return
         
         super(NodeItem, self).mouseMoveEvent(event)
