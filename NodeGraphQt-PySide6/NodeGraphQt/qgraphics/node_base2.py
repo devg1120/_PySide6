@@ -151,16 +151,18 @@ class NodeItem(AbstractNodeItem):
         #if self._mani == NodeItem.Manipilate.none:
         if True:
            mani = self.get_manipulation(pos)
-           print(mani)
+           #print(mani)
            self._mani = mani
            if mani == NodeItem.Manipilate.none:
               self.setCursor(QtGui.Qt.ArrowCursor)
            elif mani == NodeItem.Manipilate.move:
               self.setCursor(QtGui.Qt.ArrowCursor)
            elif mani == NodeItem.Manipilate.resize_l:
+              print(mani)
               self.setCursor(QtGui.Qt.SizeHorCursor)
               #self.setCursor(QtGui.Qt.SizeVerCursor)
            elif mani == NodeItem.Manipilate.resize_r:
+              print(mani)
               self.setCursor(QtGui.Qt.SizeHorCursor)
         self.update()
 
@@ -176,6 +178,17 @@ class NodeItem(AbstractNodeItem):
               return NodeItem.Manipilate.resize_r
           else:
               return NodeItem.Manipilate.move
+    def geometry(self):
+        #QtCore.QRect(x, y, width, height)
+        # rect = QtCore.QRect(self.x(), self.y(), self._width, self._height)
+        rect = QtCore.QRect(1,1,10,10)
+        return rect
+
+    def setGeometry(self,x, y, width, height):
+        self._width = width
+        self._height = height
+        self.setX(x)
+        self.setY(y)
 
     def mousePressEvent(self, event):
         """
@@ -186,10 +199,12 @@ class NodeItem(AbstractNodeItem):
         """
         #print("NodeItem mousePressEvent")
         #pos = event.pos()
-        #if self._mani == NodeItem.Manipilate.none:
-        #    self._mani = self.get_manipulation(pos)
-        #self._offset = event.pos()
-        #self._rect = self.geometry()
+        if self._mani == NodeItem.Manipilate.resize_r or self._mani == NodeItem.Manipilate.resize_l :
+             print("start resize")
+             self._offset = event.pos()
+             self._rect = self.geometry()
+             #event.ignore()
+             #return
 
         if event.button() == QtCore.Qt.LeftButton:
             for p in self._input_items.keys():
@@ -204,7 +219,7 @@ class NodeItem(AbstractNodeItem):
 
 
     def mouseMoveEvent(self, event):
-        #print("NodeItem mouseMoveEvent")
+        print("NodeItem mouseMoveEvent")
         #pos = event.pos()
         #if self._mani == NodeItem.Manipilate.none:
         #   mani = self.get_manipulation(pos)
@@ -219,17 +234,39 @@ class NodeItem(AbstractNodeItem):
         #   elif mani == NodeItem.Manipilate.resize_r:
         #      self.setCursor(QtGui.Qt.SizeHorCursor)
         #self.update()
+        
+        pos = event.pos()
+        if self._mani == NodeItem.Manipilate.resize_l:
+            print("NodeItem resize_l")
+            sub = pos - self._offset
+            #self.setGeometry(self._rect.x() + sub.x(), self._rect.y(), self._rect.width() - sub.x(), self._rect.height())
 
+            self.setX(self.x() + sub.x())
+            self._width = self._width - sub.x()
+            self.update()
+            self._offset = pos
+            return
+        elif self._mani == NodeItem.Manipilate.resize_r:
+            print("NodeItem resize_r")
+            sub = pos - self._offset
+            #self.setGeometry(self._rect.x(), self._rect.y(), self._rect.width() + sub.x(), self._rect.height())
+            self._width = self._width + sub.x()
+            self.update()
+            self._offset = pos
+            return
+        
         super(NodeItem, self).mouseMoveEvent(event)
 
     def mouseReleaseEvent(self, event):
+        print("NodeItem mouseReleaseEvent")
         """
         Re-implemented to ignore event if Alt modifier is pressed.
 
         Args:
             event (QtWidgets.QGraphicsSceneMouseEvent): mouse event.
         """
-        #self._mani = NodeItem.Manipilate.none
+        if self._mani == NodeItem.Manipilate.resize_r or self._mani == NodeItem.Manipilate.resize_l :
+            self._mani = NodeItem.Manipilate.none
         if event.modifiers() == QtCore.Qt.AltModifier:
             event.ignore()
             return
