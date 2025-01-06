@@ -114,12 +114,12 @@ class Freeze_TableWidget(QTableView):
 
 
         self.updateFrozenTableGeometry()
-        self.setHorizontalScrollMode(self.ScrollPerPixel)
-        self.setVerticalScrollMode(self.ScrollPerPixel)
+        self.setHorizontalScrollMode(QAbstractItemView.ScrollPerPixel)
+        self.setVerticalScrollMode(QAbstractItemView.ScrollPerPixel)
 
-        self.frozenCol_TableView.setVerticalScrollMode(self.ScrollPerPixel)
+        self.frozenCol_TableView.setVerticalScrollMode(QAbstractItemView.ScrollPerPixel)
         ###
-        self.frozenRow_TableView.setHorizontalScrollMode(self.ScrollPerPixel)
+        self.frozenRow_TableView.setHorizontalScrollMode(QAbstractItemView.ScrollPerPixel)
 
 
 
@@ -145,7 +145,7 @@ class Freeze_TableWidget(QTableView):
         super(Freeze_TableWidget, self).resizeEvent(event)
         self.updateFrozenTableGeometry()
 
-    def moveCursor_(self, cursorAction, modifiers):
+    def moveCursor(self, cursorAction, modifiers):
         current = super(Freeze_TableWidget, self).moveCursor(cursorAction, modifiers)
         return current
 
@@ -162,14 +162,12 @@ class Freeze_TableWidget(QTableView):
             self.horizontalScrollBar().setValue(newValue)
         return current
 
-    def moveCursor(self, cursorAction, modifiers):
+    def moveCursor_(self, cursorAction, modifiers):
         current = super(Freeze_TableWidget, self).moveCursor(cursorAction, modifiers)
-        #if (cursorAction == self.MoveLeft and
-        #        self.current.column() > 0 and
 
         total_width = 0
         for i in range(self.fp_x ):
-               total_width += self.columnWidth(0)
+               total_width += self.columnWidth(i)
 
         total_height = 0
         for i in range(self.fp_y ):

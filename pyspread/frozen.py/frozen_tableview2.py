@@ -107,12 +107,12 @@ class Freeze_TableWidget(QTableView):
 
 
         self.updateFrozenTableGeometry()
-        self.setHorizontalScrollMode(self.ScrollPerPixel)
-        self.setVerticalScrollMode(self.ScrollPerPixel)
+        self.setHorizontalScrollMode(QAbstractItemView.ScrollPerPixel)
+        self.setVerticalScrollMode(QAbstractItemView.ScrollPerPixel)
 
-        self.frozenCol_TableView.setVerticalScrollMode(self.ScrollPerPixel)
+        self.frozenCol_TableView.setVerticalScrollMode(QAbstractItemView.ScrollPerPixel)
         ###
-        self.frozenRow_TableView.setHorizontalScrollMode(self.ScrollPerPixel)
+        self.frozenRow_TableView.setHorizontalScrollMode(QAbstractItemView.ScrollPerPixel)
 
 
 
