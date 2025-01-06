@@ -51,9 +51,9 @@ class FreezeCol_TableWidget(QTableView):
         self.frozenCol_TableView.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.frozenCol_TableView.show()
         self.updateFrozenTableGeometry()
-        self.setHorizontalScrollMode(self.ScrollPerPixel)
-        self.setVerticalScrollMode(self.ScrollPerPixel)
-        self.frozenCol_TableView.setVerticalScrollMode(self.ScrollPerPixel)
+        self.setHorizontalScrollMode(QAbstractItemView.ScrollPerPixel)
+        self.setVerticalScrollMode(QAbstractItemView.ScrollPerPixel)
+        self.frozenCol_TableView.setVerticalScrollMode(QAbstractItemView.ScrollPerPixel)
 
     def updateSectionWidth(self, logicalIndex, oldSize, newSize):
         #if self.logicalIndex == 0:

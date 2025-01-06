@@ -145,7 +145,7 @@ class Freeze_TableWidget(QTableView):
         super(Freeze_TableWidget, self).resizeEvent(event)
         self.updateFrozenTableGeometry()
 
-    def moveCursor(self, cursorAction, modifiers):
+    def moveCursor_(self, cursorAction, modifiers):
         current = super(Freeze_TableWidget, self).moveCursor(cursorAction, modifiers)
         return current
 
@@ -162,7 +162,7 @@ class Freeze_TableWidget(QTableView):
             self.horizontalScrollBar().setValue(newValue)
         return current
 
-    def moveCursor_(self, cursorAction, modifiers):
+    def moveCursor(self, cursorAction, modifiers):
         current = super(Freeze_TableWidget, self).moveCursor(cursorAction, modifiers)
 
         total_width = 0
@@ -173,7 +173,7 @@ class Freeze_TableWidget(QTableView):
         for i in range(self.fp_y ):
                total_height += self.rowHeight(i)
 
-        if (cursorAction == self.MoveLeft and
+        if (cursorAction == QAbstractItemView.MoveLeft and
                 self.visualRect(current).topLeft().x() <
                     total_width ):
             newValue = (self.horizontalScrollBar().value() +
@@ -181,7 +181,7 @@ class Freeze_TableWidget(QTableView):
                         total_width)
             self.horizontalScrollBar().setValue(newValue)
 
-        if (cursorAction == self.MoveUp and
+        if (cursorAction == QAbstractItemView.MoveUp and
                 self.visualRect(current).topLeft().y() <
                     total_height ):
             newValue = (self.verticalScrollBar().value() +
