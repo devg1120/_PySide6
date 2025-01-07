@@ -719,49 +719,49 @@ class MainWindow(QMainWindow):
         widgets = self.widgets
         menubar = self.menuBar()
 
-        is_bold = attributes["fontweight"] is not None and \
+        is_bold = attributes.fontweight is not None and \
             attributes.fontweight > qt62qt5_fontweights(QFont.Weight.Normal)
         self.main_window_actions.bold.setChecked(is_bold)
         self.main_window_toolbar_actions.bold.setChecked(is_bold)
 
-        is_italic = attributes["fontstyle"] == QFont.Style.StyleItalic
+        is_italic = attributes.fontstyle == QFont.Style.StyleItalic
         self.main_window_actions.italics.setChecked(is_italic)
         self.main_window_toolbar_actions.italics.setChecked(is_italic)
 
-        self.main_window_actions.underline.setChecked(attributes["underline"])
+        self.main_window_actions.underline.setChecked(attributes.underline)
         self.main_window_toolbar_actions.underline.setChecked(
-            attributes["underline"])
+            attributes.underline)
 
         self.main_window_actions.strikethrough.setChecked(
-            attributes["strikethrough"])
+            attributes.strikethrough)
         self.main_window_toolbar_actions.strikethrough.setChecked(
-            attributes["strikethrough"])
+            attributes.strikethrough)
 
-        renderer = attributes["renderer"]
+        renderer = attributes.renderer
         widgets.renderer_button.set_current_action(renderer)
         widgets.renderer_button.set_menu_checked(renderer)
 
-        self.main_window_actions.freeze_cell.setChecked(attributes["frozen"])
+        self.main_window_actions.freeze_cell.setChecked(attributes.frozen)
         self.main_window_toolbar_actions.freeze_cell.setChecked(
-            attributes["frozen"])
+            attributes.frozen)
 
-        self.main_window_actions.lock_cell.setChecked(attributes["locked"])
+        self.main_window_actions.lock_cell.setChecked(attributes.locked)
         self.main_window_toolbar_actions.lock_cell.setChecked(
-            attributes["locked"])
-        self.entry_line.setReadOnly(attributes["locked"])
+            attributes.locked)
+        self.entry_line.setReadOnly(attributes.locked)
 
         self.main_window_actions.button_cell.setChecked(
-            attributes["button_cell"] is not False)
+            attributes.button_cell is not False)
         self.main_window_toolbar_actions.button_cell.setChecked(
-            attributes["button_cell"] is not False)
+            attributes.button_cell is not False)
 
-        rotation = f"rotate_{int(attributes['angle'])}"
+        rotation = f"rotate_{int(attributes.angle)}"
         widgets.rotate_button.set_current_action(rotation)
         widgets.rotate_button.set_menu_checked(rotation)
-        widgets.justify_button.set_current_action(attributes["justification"])
-        widgets.justify_button.set_menu_checked(attributes["justification"])
-        widgets.align_button.set_current_action(attributes["vertical_align"])
-        widgets.align_button.set_menu_checked(attributes["vertical_align"])
+        widgets.justify_button.set_current_action(attributes.justification)
+        widgets.justify_button.set_menu_checked(attributes.justification)
+        widgets.align_button.set_current_action(attributes.vertical_align)
+        widgets.align_button.set_menu_checked(attributes.vertical_align)
 
         border_action = self.main_window_actions.border_group.checkedAction()
         if border_action is not None:
@@ -776,31 +776,31 @@ class MainWindow(QMainWindow):
             menubar.format_menu.line_width_submenu.setIcon(icon)
             self.format_toolbar.line_width_button.setIcon(icon)
 
-        if attributes["textcolor"] is None:
+        if attributes.textcolor is None:
             text_color = self.grid.palette().color(QPalette.ColorRole.Text)
         else:
-            text_color = QColor(*attributes["textcolor"])
+            text_color = QColor(*attributes.textcolor)
         widgets.text_color_button.color = text_color
 
-        if attributes["bordercolor_bottom"] is None:
+        if attributes.bordercolor_bottom is None:
             line_color = self.grid.palette().color(QPalette.ColorRole.Mid)
         else:
-            line_color = QColor(*attributes["bordercolor_bottom"])
+            line_color = QColor(*attributes.bordercolor_bottom)
         widgets.line_color_button.color = line_color
 
-        if attributes["bgcolor"] is None:
+        if attributes.bgcolor is None:
             bgcolor = self.grid.palette().color(QPalette.ColorRole.Base)
         else:
-            bgcolor = QColor(*attributes["bgcolor"])
+            bgcolor = QColor(*attributes.bgcolor)
         widgets.background_color_button.color = bgcolor
 
-        if attributes["textfont"] is None:
+        if attributes.textfont is None:
             widgets.font_combo.font = QFont().family()
         else:
-            widgets.font_combo.font = attributes["textfont"]
-        widgets.font_size_combo.size = attributes["pointsize"]
+            widgets.font_combo.font = attributes.textfont
+        widgets.font_size_combo.size = attributes.pointsize
 
         self.main_window_actions.merge_cells.setChecked(
-            attributes["merge_area"] is not None)
+            attributes.merge_area is not None)
         self.main_window_toolbar_actions.merge_cells.setChecked(
-            attributes["merge_area"] is not None)
+            attributes.merge_area is not None)

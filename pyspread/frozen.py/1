@@ -43,7 +43,10 @@ class Freeze_TableWidget(QTableView):
         self.frozenCol_TableView.setFocusPolicy(Qt.NoFocus)
         self.frozenCol_TableView.verticalHeader().hide()
         self.frozenCol_TableView.horizontalHeader().setSectionResizeMode(
-                QHeaderView.Fixed)
+        #        QHeaderView.Fixed)
+                QHeaderView.Interactive)
+        self.frozenCol_TableView.horizontalHeader().sectionResized.connect(self.FrozenColUpdateSectionWidth)
+
         #self.viewport().stackUnder(self.frozenCol_TableView)
 
         self.frozenCol_TableView.setStyleSheet('''
@@ -67,7 +70,9 @@ class Freeze_TableWidget(QTableView):
         self.frozenRow_TableView.setFocusPolicy(Qt.NoFocus)
         self.frozenRow_TableView.horizontalHeader().hide()
         self.frozenRow_TableView.verticalHeader().setSectionResizeMode(
-                QHeaderView.Fixed)
+        #        QHeaderView.Fixed)
+                QHeaderView.Interactive)
+        self.frozenRow_TableView.verticalHeader().sectionResized.connect(self.FrozenRowUpdateSectionHeight)
 
         self.frozenRow_TableView.setStyleSheet('''
             QTableView { border: none;
@@ -90,9 +95,12 @@ class Freeze_TableWidget(QTableView):
         self.corner_TableView.setModel(self.model())
         self.corner_TableView.setFocusPolicy(Qt.NoFocus)
         self.corner_TableView.horizontalHeader().hide()
-        self.corner_TableView.verticalHeader().setSectionResizeMode(
-                QHeaderView.Fixed)
+        self.corner_TableView.verticalHeader().hide()
+        #self.corner_TableView.verticalHeader().setSectionResizeMode(
+        #        QHeaderView.Fixed)
+        #        QHeaderView.Interactive)
 
+        #self.conner_TableView.verticalHeader().sectionResized.connect(self.ConnerUpdateSectionHeight)
         self.corner_TableView.setStyleSheet('''
             QTableView { border: none;
                          selection-background-color: #999;
@@ -131,6 +139,11 @@ class Freeze_TableWidget(QTableView):
         ###
         self.frozenRow_TableView.setColumnWidth(logicalIndex, newSize)
 
+        #print("Col",logicalIndex)
+        #if logicalIndex == self.fp_x -1:
+        #    self.corner_TableView.setColumnWidth(logicalIndex, newSize)
+        #    self.frozenCol_TableView.setColumnWidth(logicalIndex, newSize)
+
     def updateSectionHeight(self, logicalIndex, oldSize, newSize):
         self.frozenCol_TableView.setRowHeight(logicalIndex, newSize)
         ###
@@ -139,6 +152,33 @@ class Freeze_TableWidget(QTableView):
             self.frozenRow_TableView.setRowHeight(logicalIndex, newSize)
             self.corner_TableView.setRowHeight(logicalIndex, newSize)
             self.updateFrozenTableGeometry()
+
+        #print("Row",logicalIndex)
+        #if logicalIndex == self.fp_y -1 :
+        #    self.corner_TableView.setRowHeight(logicalIndex, newSize)
+
+    def FrozenColUpdateSectionWidth(self, logicalIndex, oldSize, newSize):
+        print("Col Width")
+        self.corner_TableView.setColumnWidth(logicalIndex, newSize)
+        #self.frozenCol_TableView.setColumnWidth(logicalIndex, newSize)
+        #self.frozenRow_TableView.setColumnWidth(logicalIndex, newSize)
+        if logicalIndex < self.fp_x:
+          self.setColumnWidth(logicalIndex + 1, newSize)
+          self.width += (newSize- oldSize)
+        pass
+
+    def FrozenRowUpdateSectionHeight(self, logicalIndex, oldSize, newSize):
+        print("Row Height")
+        self.corner_TableView.setRowHeight(logicalIndex, newSize)
+        #self.frozenCol_TableView.setRowHeight(logicalIndex, newSize)
+        #self.frozenRow_TableView.setRowHeight(logicalIndex, newSize)
+        #self.setRowHeight(logicalIndex, newSize)
+        #self.updateFrozenTableGeometry()
+        pass
+
+    def ConnerUpdateSectionHeight(self, logicalIndex, oldSize, newSize):
+        print("Conner Height")
+        pass
 
     def resizeEvent(self, event):
         super(Freeze_TableWidget, self).resizeEvent(event)
@@ -217,10 +257,12 @@ class Freeze_TableWidget(QTableView):
                 )
 
         self.corner_TableView.setGeometry(
-                self.frameWidth(), 
+                #self.frameWidth(), 
+                self.frameWidth() + self.verticalHeader().width(), 
                 self.horizontalHeader().height() + self.frameWidth(),
                 #self.verticalHeader().width() + self.columnWidth(0),
-                self.verticalHeader().width() + total_width,
+                #self.verticalHeader().width() + total_width,
+                total_width,
                 #self.rowHeight(0)
                 total_height
                 )
