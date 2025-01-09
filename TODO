@@ -1,14 +1,14 @@
 
+pyspread/frozen.py
+   frozen_tableview6.py
 
 
-node size resize
+
+QT-PyQt-PySide-Custom-Widgets
+
+    cd examples/PySide6/QCustomEmbededWindow
+
+    main.py
 
 
-_PySide6/NodeGraphQt-PySide6/examples
-   python3 resize_node.py 
-
-
-   source   
-      PySide6/NodeGraphQt-PySide6/NodeGraphQt/qgraphics/node_base2.py
-                         class NodeItem(AbstractNodeItem):
 

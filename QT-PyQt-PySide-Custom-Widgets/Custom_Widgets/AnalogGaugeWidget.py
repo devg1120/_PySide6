@@ -1163,7 +1163,8 @@ class AnalogGaugeWidget(QWidget):
         for i in range(self.scalaCount + 1):
             # text = str(int((self.maxValue - self.minValue) / self.scalaCount * i))
             text = str(int(self.minValue + scale_per_div * i))
-            w = fm.width(text) + 1
+            #GUSA w = fm.width(text) + 1
+            w = fm.horizontalAdvance(text) + 1
             h = fm.height()
             painter.setFont(QFont(self.scale_fontname, self.scale_fontsize, QFont.Bold))
             angle = angle_distance * i + float(self.scale_angle_start_value - self.angle_offset)
@@ -1230,7 +1231,8 @@ class AnalogGaugeWidget(QWidget):
         # angle_distance = (float(self.scale_angle_size) / float(self.scalaCount))
         # for i in range(self.scalaCount + 1):
         text = str(int(self.value))
-        w = fm.width(text) + 1
+        #GUSA w = fm.width(text) + 1
+        w = fm.horizontalAdvance(text) + 1
         h = fm.height()
         painter.setFont(QFont(self.value_fontname, self.value_fontsize, QFont.Bold))
 
@@ -1273,7 +1275,8 @@ class AnalogGaugeWidget(QWidget):
         text_radius = self.widget_diameter / 2 * self.text_radius_factor
 
         text = str(self.units)
-        w = fm.width(text) + 1
+        #w = fm.width(text) + 1
+        w = fm.horizontalAdvance(text) + 1
         h = fm.height()
         painter.setFont(QFont(self.value_fontname, int(self.value_fontsize / 2.5), QFont.Bold))
 

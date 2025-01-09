@@ -9,7 +9,6 @@
 ########################################################################
 import os
 import sys
-sys.path.append("../../..")
 
 ########################################################################
 # IMPORT GUI FILE
@@ -18,6 +17,7 @@ from ui_interface import *
 
 ########################################################################
 # IMPORT Custom widgets
+sys.path.append("../../../")
 from Custom_Widgets.QCustomEmbededWindow import QCustomEmbededWindow
 ########################################################################
 from PySide6.QtWidgets import QStyle
@@ -44,7 +44,7 @@ class MainWindow(QMainWindow):
             self.css_style = f.read()
 
         # Apply the CSS style to the QCustomEmbededWindow instance
-        self.setStyleSheet(self.css_style)
+        #self.setStyleSheet(self.css_style)
 
         @self.ui.pushButton.clicked.connect
         def slot():

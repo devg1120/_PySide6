@@ -1,4 +1,5 @@
 import sys
+sys.path.append("../../../")
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QColor
 from PySide6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QHBoxLayout, QPushButton, QWidget, QGraphicsDropShadowEffect

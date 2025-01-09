@@ -1,0 +1,19 @@
+
+GTK-lib install
+https://github.com/tschoonj/GTK-for-Windows-Runtime-Environment-Installer/releases
+
+pip install qtsass
+pip install cairosvg
+pip install cairocffi
+pip install termcolor
+pip install lxml
+
+
+1)
+
+cd examples/PySide6/QCustomEmbededWindow
+
+vi main.py
+sys.path.append("../../../")
+
+python main.py

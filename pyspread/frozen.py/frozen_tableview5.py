@@ -96,9 +96,10 @@ class Freeze_TableWidget(QTableView):
         self.corner_TableView.setFocusPolicy(Qt.NoFocus)
         self.corner_TableView.horizontalHeader().hide()
         self.corner_TableView.verticalHeader().hide()
+        #self.corner_TableView.horizontalHeader().setSectionResizeMode(
+        #        QHeaderView.Fixed)
         #self.corner_TableView.verticalHeader().setSectionResizeMode(
         #        QHeaderView.Fixed)
-        #        QHeaderView.Interactive)
 
         #self.conner_TableView.verticalHeader().sectionResized.connect(self.ConnerUpdateSectionHeight)
         self.corner_TableView.setStyleSheet('''
