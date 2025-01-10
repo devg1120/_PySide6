@@ -1,8 +1,5 @@
 
 
-#from PyQt5.QtCore import QFile, QFileInfo, Qt
-#from PyQt5.QtGui import QStandardItem, QStandardItemModel
-#from PyQt5.QtWidgets import QApplication, QHeaderView, QTableView
 
 from PySide6.QtWidgets import *                                         
 from PySide6.QtCore import *                               
@@ -14,8 +11,10 @@ class Freeze_TableWidget(QTableView):
     def __init__(self, model):
         super(Freeze_TableWidget, self).__init__()
 
+        #self.fp_x = 2  # -
+        #self.fp_y = 3  # |
         self.fp_x = 2  # -
-        self.fp_y = 3  # |
+        self.fp_y = 2  # |
 
         self.setModel(model)
 
@@ -25,14 +24,9 @@ class Freeze_TableWidget(QTableView):
 
         self.init()
 
-        #self.horizontalHeader().setSectionResizeMode(0, QHeaderView.Fixed)
-        #self.horizontalHeader().setSectionResizeMode(1, QHeaderView.Fixed)
-        #self.horizontalHeader().setSectionResizeMode(2, QHeaderView.Fixed)
         for x in range(self.fp_x):
-            #print(x)
             self.horizontalHeader().setSectionResizeMode(x, QHeaderView.Fixed)
         for y in range(self.fp_y):
-            #print(y)
             self.verticalHeader().setSectionResizeMode(y, QHeaderView.Fixed)
 
         self.horizontalHeader().sectionResized.connect(self.updateSectionWidth)
@@ -62,10 +56,11 @@ class Freeze_TableWidget(QTableView):
 
         self.frozenCol_TableView.setStyleSheet('''
             QTableView { border: none;
-                         background-color: red;
+                         background-color: none;
                          selection-background-color: #999;
                          border-right: 2px solid green;
             }''') # for demo purposes
+
         self.frozenCol_TableView.setSelectionModel(self.selectionModel())
         #for col in range(1, self.model().columnCount()):
         for col in range(self.fp_x, self.model().columnCount()):
@@ -87,7 +82,7 @@ class Freeze_TableWidget(QTableView):
 
         self.frozenRow_TableView.setStyleSheet('''
             QTableView { border: none;
-                         background-color: blue;
+                         background-color: none;
                          selection-background-color: #999;
                          border-bottom: 2px solid green;
             }''') # for demo purposes
@@ -115,7 +110,7 @@ class Freeze_TableWidget(QTableView):
         #self.conner_TableView.verticalHeader().sectionResized.connect(self.ConnerUpdateSectionHeight)
         self.corner_TableView.setStyleSheet('''
             QTableView { border: none;
-                         background-color: gray;
+                         background-color: none;
                          selection-background-color: #999;
                          border-bottom: 2px solid green;
                          border-right: 2px solid green;
@@ -147,7 +142,7 @@ class Freeze_TableWidget(QTableView):
 
         self.setStyleSheet('''
             QTableView { border: none;
-                         background-color: #16A87C ;
+                         background-color: none ;
                          selection-background-color: #999;
             }''') # for demo purposes
 
