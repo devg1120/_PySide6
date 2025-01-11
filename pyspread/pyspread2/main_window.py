@@ -37,7 +37,7 @@ pyspread
 import os
 from pathlib import Path
 
-from PySide6.QtCore import Qt, Signal, QEvent, QTimer, QRectF
+from PySide6.QtCore import Qt, Signal, QEvent, QTimer, QRectF, QFile, QFileInfo
 from PySide6.QtWidgets import (QWidget, QMainWindow, QApplication,QTableView,  #GUSA GS
                              QMessageBox, QDockWidget, QVBoxLayout,
                              QStyleOptionViewItem, QSplitter)
@@ -45,7 +45,7 @@ try:
     from PySide6.QtSvgWidgets import QSvgWidget
 except ImportError:
     QSvgWidget = None
-from PySide6.QtGui import QColor, QFont, QPalette, QPainter, QUndoStack, QStandardItemModel
+from PySide6.QtGui import QColor, QFont, QPalette, QPainter, QUndoStack, QStandardItemModel, QStandardItem
 from PySide6.QtPrintSupport import QPrinter, QPrintDialog
 
 try:
@@ -233,11 +233,38 @@ class MainWindow(QMainWindow):
         #self.grid_2 = Grid(self, self.grid.model)
         #self.grid_3 = Grid(self, self.grid.model)
         #self.grid_4 = Grid(self, self.grid.model)
-        model = QStandardItemModel()    #GUSA GS
+
         self.grid = QTableView(self)    #GUSA GS
         self.grid_2 = QTableView(self)    #GUSA GS
         self.grid_3 = QTableView(self)    #GUSA GS
         self.grid_4 = QTableView(self)    #GUSA GS
+
+        def split_and_strip(s, splitter):
+            return [s.strip() for s in line.split(splitter)]
+
+        model = QStandardItemModel()    #GUSA GS
+        file = QFile(QFileInfo(__file__).absolutePath() + '/sample_csv.csv')
+        if file.open(QFile.ReadOnly):
+            #line = file.readLine(200).decode('utf-8')
+            #line = str (file.readLine(200), 'utf-8')
+            line = str (file.readLine(), 'utf-8')
+            header = split_and_strip(line, ',')
+            model.setHorizontalHeaderLabels(header)
+            row = 0
+            #while file.canReadLine():
+            while not file.atEnd():
+                #line = file.readLine(200).decode('utf-8')
+                #line = str(file.readLine(200),'utf-8')
+                line = str(file.readLine(),'utf-8')
+                if not line.startswith('#') and ',' in line:
+                    fields = split_and_strip(line, ',')
+                    for col, field in enumerate(fields):
+                        newItem = QStandardItem(field)
+                        model.setItem(row, col, newItem)
+                    row += 1
+                    #print(row)
+                    #print(line)
+        file.close()
 
         self.grid.setModel(model)
         self.grid_2.setModel(model)
