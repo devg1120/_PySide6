@@ -207,7 +207,7 @@ class MainWindow(QMainWindow):
         :param event: Any QEvent
 
         """
-
+        print("closeEvent")
         if event:
             event.ignore()
         self.workflows.file_quit()  # has @handle_changed_since_save decorator

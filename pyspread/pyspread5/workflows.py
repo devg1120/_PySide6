@@ -1054,7 +1054,7 @@ class Workflows:
     def file_quit(self):
         """Program exit workflow"""
 
-        self.main_window.settings.save()
+        #GUSA self.main_window.settings.save()
         QApplication.instance().quit()
 
     # Edit menu
