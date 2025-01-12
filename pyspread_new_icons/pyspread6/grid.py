@@ -211,6 +211,12 @@ class Grid(Freeze_TableWidget):
         self.table_scrolls = {0: (self.verticalScrollBar().value(),
                                   self.horizontalScrollBar().value())}
 
+        #self.itemChanged.connect(self.cell_updated)
+
+    def cell_updated(self,item):
+        print("update")
+
+
     @contextmanager
     def undo_resizing_row(self):
         """Sets self.__undo_resizing_row to True for context"""

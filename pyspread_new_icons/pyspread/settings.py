@@ -51,6 +51,7 @@ PLOT9_TEMPLATE_PATH = PYSPREAD_PATH / 'pyspread/share/templates/plotnine'
 #ICON_PATH = PYSPREAD_PATH / 'pyspread/share/icons'
 ICON_PATH = PYSPREAD_PATH / 'pyspread/share/icons2'
 ACTION_PATH = ICON_PATH / 'actions'
+ACTION_DARK_PATH = ICON_PATH / 'actions_dark'
 STATUS_PATH = ICON_PATH / 'status'
 CHARTS_PATH = ICON_PATH / 'charts'
 WEB_URL = "https://pyspread.gitlab.io"  # Official Web page

@@ -1,14 +1,12 @@
 
-pyspread/frozen.py
-   frozen_tableview6.py
 
 
+/home/devg1120/_PySide6/pyspread_new_icons/pyspread6
 
-QT-PyQt-PySide-Custom-Widgets
+ *** input current cell down
 
-    cd examples/PySide6/QCustomEmbededWindow
+                 frozen_tableview9.py
 
-    main.py
-
+		          def dataChanged(self, topLeft, bottomRight, roles):
 
 

@@ -32,10 +32,10 @@
 from PySide6.QtGui import QIcon
 
 try:
-    from pyspread.settings import (ICON_PATH, ACTION_PATH, STATUS_PATH,
+    from pyspread.settings import (ICON_PATH, ACTION_PATH,  STATUS_PATH,
                                    CHARTS_PATH)
 except ImportError:
-    from settings import ICON_PATH, ACTION_PATH, STATUS_PATH, CHARTS_PATH
+    from settings import ICON_PATH, ACTION_PATH,  STATUS_PATH, CHARTS_PATH
 
 
 class IconPath:
@@ -50,25 +50,25 @@ class IconPath:
     # File menu icons
     #new = ACTION_PATH / 'document-new2.svg'
     new = ACTION_PATH / 'edit.svg'
-    open = ACTION_PATH / 'document-open.svg'
-    save = ACTION_PATH / 'document-save.svg'
-    save_as = ACTION_PATH / 'document-save-as.svg'
-    imprt = ACTION_PATH / 'document-import.svg'
-    export = ACTION_PATH / 'document-export.svg'
-    approve = ACTION_PATH / 'document-approve.svg'
+    open = ACTION_PATH / 'file.svg'
+    save = ACTION_PATH / 'save.svg'
+    save_as = ACTION_PATH / 'save-as.svg'
+    imprt = ACTION_PATH / 'import.svg'
+    export = ACTION_PATH / 'download.svg'
+    approve = ACTION_PATH / 'approve.svg'
     clear_globals = ACTION_PATH / 'edit-clear.svg'
     page_setup = ACTION_PATH / 'document-page-setup.svg'
     print_preview = ACTION_PATH / 'document-print-preview.svg'
-    print = ACTION_PATH / 'document-print.svg'
+    print = ACTION_PATH / 'printer.svg'
     preferences = ACTION_PATH / 'document-properties.svg'
     new_gpg_key = ACTION_PATH / 'document-new-gpg-key.svg'
     quit = ACTION_PATH / 'document-log-out.svg'
 
     # Edit menu icons
-    undo = ACTION_PATH / 'edit-undo.svg'
-    redo = ACTION_PATH / 'edit-redo.svg'
-    cut = ACTION_PATH / 'edit-cut.svg'
-    copy = ACTION_PATH / 'edit-copy.svg'
+    undo = ACTION_PATH / 'corner-up-left.svg'
+    redo = ACTION_PATH / 'corner-up-right.svg'
+    cut = ACTION_PATH / 'scissors.svg'
+    copy = ACTION_PATH / 'copy.svg'
     copy_results = ACTION_PATH / 'edit-copy-results.svg'
     paste = ACTION_PATH / 'edit-paste.svg'
     paste_as = ACTION_PATH / 'edit-paste-as.svg'

@@ -42,15 +42,16 @@ class IconPath:
     """Holds icon paths as attributes"""
 
     pyspread = ICON_PATH / 'hicolor' / 'svg' / 'pyspread.svg'
-    print("icons2")
+
     # Status icons
     safe_mode = STATUS_PATH / 'status-safe-mode.svg'
     selection_mode = STATUS_PATH / 'status-selection-mode.svg'
 
     # File menu icons
-    new = ACTION_PATH / 'file-plus.svg'
+    #new = ACTION_PATH / 'document-new2.svg'
+    new = ACTION_PATH / 'edit.svg'
     open = ACTION_PATH / 'document-open.svg'
-    save = ACTION_PATH / 'file.svg'
+    save = ACTION_PATH / 'save.svg'
     save_as = ACTION_PATH / 'document-save-as.svg'
     imprt = ACTION_PATH / 'document-import.svg'
     export = ACTION_PATH / 'document-export.svg'

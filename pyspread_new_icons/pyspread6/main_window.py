@@ -37,8 +37,8 @@ pyspread
 import os
 from pathlib import Path
 
-from PySide6.QtCore import Qt, Signal, QEvent, QTimer, QRectF, QFile, QFileInfo
-from PySide6.QtWidgets import (QWidget, QMainWindow, QApplication,QTableView,  #GUSA GS
+from PySide6.QtCore import Qt, Signal, Slot, QEvent, QTimer, QRectF, QFile, QFileInfo
+from PySide6.QtWidgets import (QWidget, QMainWindow, QApplication,QTableView,  QTableWidgetItem, #GUSA GS
                              QMessageBox, QDockWidget, QVBoxLayout,
                              QStyleOptionViewItem, QSplitter)
 try:
@@ -280,6 +280,9 @@ class MainWindow(QMainWindow):
         self.grid_3.init(model)
         self.grid_4.init(model)
 
+
+        #self.grid.itemChanged.connect(self.on_cell_changed)  
+        #self.grid.columnResized.connect(on_columnResized)
 
         self.grids = [self.grid, self.grid_2, self.grid_3, self.grid_4]
 
@@ -851,3 +854,11 @@ class MainWindow(QMainWindow):
             attributes["merge_area"] is not None)
         self.main_window_toolbar_actions.merge_cells.setChecked(
             attributes["merge_area"] is not None)
+
+    @Slot(QTableWidgetItem)
+    def on_cell_changed(self, item):
+        print("on_cell_changed: " ,item)
+    
+def on_columnResized(self, column, oldWidth, newWidth):
+   print("on_columnResized")
+
