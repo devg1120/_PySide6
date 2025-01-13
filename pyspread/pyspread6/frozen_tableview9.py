@@ -11,10 +11,10 @@ class Freeze_TableWidget(QTableView):
     def __init__(self):
         super(Freeze_TableWidget, self).__init__()
 
-        #self.fp_x = 2  # -
-        #self.fp_y = 3  # |
         self.fp_x = 2  # -
-        self.fp_y = 2  # |
+        self.fp_y = 3  # |
+        #self.fp_x = 0  # -
+        #self.fp_y = 0  # |
 
     def init(self, model_):
         self.setModel(model_)
@@ -258,9 +258,9 @@ class Freeze_TableWidget(QTableView):
             self.verticalScrollBar().setValue(newValue)
         return current
 
-    def scrollTo(self, index, hint):
-        if index.column() > 0:
-            super(Freeze_TableWidget, self).scrollTo(index, hint)
+    #def scrollTo(self, index, hint):
+    #    if index.column() > 0:
+    #        super(Freeze_TableWidget, self).scrollTo(index, hint)
 
     def updateFrozenTableGeometry(self):
         total_width = 0

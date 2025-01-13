@@ -1,0 +1,255 @@
+共通のサブディレクトリー: pyspread6/__pycache__ と pyspread7/__pycache__
+diff -Bb -6 -u pyspread6/actions.py pyspread7/actions.py
+--- pyspread6/actions.py	2025-01-11 17:54:55.401994176 +0900
++++ pyspread7/actions.py	2025-01-13 12:24:03.924711468 +0900
+@@ -407,18 +407,26 @@
+             Action(self.parent, "Toggle periodic updates",
+                    self.parent.on_toggle_refresh_timer,
+                    icon=Icon.toggle_periodic_updates, checkable=True,
+                    statustip='Toggles periodic updates for frozen cells')
+ 
+         self.show_frozen = Action(self.parent, "Show frozen",
+-                                  self.parent.grid.on_show_frozen_pressed,
++                                  #self.parent.grid.on_show_frozen_pressed,
++                                  self.parent.on_set_frozen,
+                                   icon=Icon.show_frozen,
+                                   checkable=True,
+                                   statustip='Indicates frozen cells with a '
+                                             'background crosshatch')
+ 
++        self.reset_frozen = Action(self.parent, "Reset frozen",
++                                  #self.parent.grid.on_show_frozen_pressed,
++                                  self.parent.on_reset_frozen,
++                                  icon=Icon.reset_frozen,
++                                  checkable=True,
++                                  statustip='Indicates frozen cells with a '
++                                            'background crosshatch')
+     def create_format_actions(self):
+         """actions for Format menu"""
+ 
+         self.copy_format = Action(self.parent, "&Copy format",
+                                   self.parent.workflows.format_copy_format,
+                                   icon=Icon.copy_format,
+diff -Bb -6 -u pyspread6/frozen_tableview9.py pyspread7/frozen_tableview9.py
+--- pyspread6/frozen_tableview9.py	2025-01-13 12:43:51.771898425 +0900
++++ pyspread7/frozen_tableview9.py	2025-01-13 16:17:27.097947686 +0900
+@@ -10,16 +10,17 @@
+ class Freeze_TableWidget(QTableView):
+     def __init__(self):
+         super(Freeze_TableWidget, self).__init__()
+ 
+         #self.fp_x = 2  # -
+         #self.fp_y = 3  # |
+-        self.fp_x = 2  # -
+-        self.fp_y = 2  # |
++        self.fp_x = 0  # -
++        self.fp_y = 0  # |
+ 
+     def init(self, model_):
++        self._model = model_
+         self.setModel(model_)
+ 
+         self.frozenCol_TableView = QTableView(self)
+         self.frozenRow_TableView = QTableView(self)
+         self.corner_TableView = QTableView(self)
+ 
+@@ -142,12 +143,38 @@
+         self.setStyleSheet('''
+             QTableView { border: none;
+                          background-color: none ;
+                          selection-background-color: #999;
+             }''') # for demo purposes
+ 
++    def reset_fp(self):
++        for col in range(0, self._model.columnCount()):
++            self.frozenCol_TableView.setColumnHidden(col, False)
++        for row in range(0, self._model.rowCount()):
++            self.frozenRow_TableView.setRowHidden(row, False)
++        for row in range(0, self._model.rowCount()):
++            self.corner_TableView.setRowHidden(row, False)
++        for col in range(0, self._model.columnCount()):
++            self.corner_TableView.setColumnHidden(col, False)
++
++        for x in range(self.fp_x):
++            self.horizontalHeader().setSectionResizeMode(x, QHeaderView.Fixed)
++        for y in range(self.fp_y):
++            self.verticalHeader().setSectionResizeMode(y, QHeaderView.Fixed)
++        for col in range(self.fp_x,self._model.columnCount()):
++            self.frozenCol_TableView.setColumnHidden(col, True)
++        for row in range(self.fp_y, self._model.rowCount()):
++            self.frozenRow_TableView.setRowHidden(row, True)
++        for row in range(self.fp_y, self._model.rowCount()):
++            self.corner_TableView.setRowHidden(row, True)
++        for col in range(self.fp_x, self._model.columnCount()):
++            self.corner_TableView.setColumnHidden(col, True)
++
++        self.frozenCol_TableView.updateGeometries()
++        self.frozenRow_TableView.updateGeometries()
++        self.corner_TableView.updateGeometries()
+ 
+     def updateSectionWidth(self, logicalIndex, oldSize, newSize):
+         #print("Base Width", logicalIndex)
+         self.frozenRow_TableView.setColumnWidth(logicalIndex, newSize)
+         #if logicalIndex == 0:
+         #    self.frozenCol_TableView.setColumnWidth(0, newSize)
+@@ -212,13 +239,13 @@
+         pass
+ 
+     def resizeEvent(self, event):
+         super(Freeze_TableWidget, self).resizeEvent(event)
+         self.updateFrozenTableGeometry()
+ 
+-    def moveCursor_(self, cursorAction, modifiers):
++    def moveCursor_1(self, cursorAction, modifiers):
+         current = super(Freeze_TableWidget, self).moveCursor(cursorAction, modifiers)
+         return current
+ 
+     def moveCursor_2(self, cursorAction, modifiers):
+         current = super(Freeze_TableWidget, self).moveCursor(cursorAction, modifiers)
+         if (cursorAction == self.MoveLeft and
+@@ -255,15 +282,15 @@
+             newValue = (self.verticalScrollBar().value() +
+                         self.visualRect(current).topLeft().y() -
+                         total_height)
+             self.verticalScrollBar().setValue(newValue)
+         return current
+ 
+-    def scrollTo(self, index, hint):
+-        if index.column() > 0:
+-            super(Freeze_TableWidget, self).scrollTo(index, hint)
++    #def scrollTo(self, index, hint):
++    #    if index.column() > 0:
++    #        super(Freeze_TableWidget, self).scrollTo(index, hint)
+ 
+     def updateFrozenTableGeometry(self):
+         total_width = 0
+         for i in range(self.fp_x ):
+                total_width += self.columnWidth(i)
+         self.frozenCol_TableView.setGeometry(
+diff -Bb -6 -u pyspread6/grid.py pyspread7/grid.py
+--- pyspread6/grid.py	2025-01-13 09:38:50.115098260 +0900
++++ pyspread7/grid.py	2025-01-13 12:35:17.529040028 +0900
+@@ -226,12 +226,34 @@
+         if  cindex.column() == topLeft.column() and  \
+             cindex.row()    == topLeft.row():
+           print("dataChanged" )
+           e = QKeyEvent(QEvent.KeyPress, Qt.Key_Down , Qt.NoModifier)
+           QCoreApplication.postEvent(self, e)
+ 
++    def set_frozen(self):
++        print("grid set Frozen:")
++        index = self.currentIndex()
++        self.fp_x = index.column() 
++        self.fp_y = index.row() 
++        self.reset_fp()
++        self.updateFrozenTableGeometry()
++
++    def reset_frozen(self):
++        print("grid reset Frozen:")
++        index = self.currentIndex()
++        self.fp_x =  0
++        self.fp_y =  0
++        self.reset_fp()
++        self.updateFrozenTableGeometry()
++
++ 
++    def currentChanged(self, current, previous):
++        super().currentChanged( current, previous)
++        #print("currentChanged:")
++        self.main_window.active_grid = self
++
+     @contextmanager
+     def undo_resizing_row(self):
+         """Sets self.__undo_resizing_row to True for context"""
+ 
+         self.__undo_resizing_row = True
+         yield
+diff -Bb -6 -u pyspread6/icons.py pyspread7/icons.py
+--- pyspread6/icons.py	2025-01-12 09:31:40.425994175 +0900
++++ pyspread7/icons.py	2025-01-13 12:22:55.534257232 +0900
+@@ -94,13 +94,15 @@
+     check_spelling = ACTION_PATH / 'view-check-spelling.svg'
+     zoom_in = ACTION_PATH / 'view-zoom-in.svg'
+     zoom_out = ACTION_PATH / 'view-zoom-out.svg'
+     zoom_1 = ACTION_PATH / 'view-zoom-original.svg'
+     refresh = ACTION_PATH / 'view-refresh.svg'
+     toggle_periodic_updates = ACTION_PATH / 'view-timer.svg'
+-    show_frozen = ACTION_PATH / 'view-show-frozen.svg'
++    #show_frozen = ACTION_PATH / 'view-show-frozen.svg'
++    show_frozen = ACTION_PATH / 'layout.svg'
++    reset_frozen = ACTION_PATH / 'square.svg'
+ 
+     # Format menu icons
+     copy_format = ACTION_PATH / 'format-copy.svg'
+     paste_format = ACTION_PATH / 'format-paste.svg'
+     font_dialog = ACTION_PATH / 'format-font.svg'
+     bold = ACTION_PATH / 'format-text-bold.svg'
+共通のサブディレクトリー: pyspread6/interfaces と pyspread7/interfaces
+共通のサブディレクトリー: pyspread6/lib と pyspread7/lib
+diff -Bb -6 -u pyspread6/main_window.py pyspread7/main_window.py
+--- pyspread6/main_window.py	2025-01-12 11:17:59.146995995 +0900
++++ pyspread7/main_window.py	2025-01-13 12:25:06.082034365 +0900
+@@ -155,12 +155,14 @@
+             if self.workflows.filepath_open(filepath):
+                 self.workflows.update_main_window_title()
+             else:
+                 msg = f"File '{filepath}' could not be opened."
+                 self.statusBar().showMessage(msg)
+ 
++        self.active_grid = None
++
+     def _init_window(self):
+         """Initialize main window components"""
+ 
+         self.setWindowTitle(APP_NAME)
+         self.setWindowIcon(Icon.pyspread)
+ 
+@@ -719,12 +721,22 @@
+     def on_tutorial(self):
+         """Show tutorial browser"""
+ 
+         dialog = TutorialDialog(self)
+         dialog.show()
+ 
++    def on_set_frozen(self):
++        print("on_set_frozen")
++        if self.active_grid != None:
++           self.active_grid.set_frozen()
++
++    def on_reset_frozen(self):
++        print("on_reset_frozen")
++        if self.active_grid != None:
++           self.active_grid.reset_frozen()
++
+     def on_about(self):
+         """Show about message box"""
+ 
+         def devs_string(devs: list) -> str:
+             """Get string from devs list"""
+ 
+共通のサブディレクトリー: pyspread6/model と pyspread7/model
+共通のサブディレクトリー: pyspread6/share と pyspread7/share
+共通のサブディレクトリー: pyspread6/test と pyspread7/test
+diff -Bb -6 -u pyspread6/toolbar.py pyspread7/toolbar.py
+--- pyspread6/toolbar.py	2025-01-12 08:48:23.587895807 +0900
++++ pyspread7/toolbar.py	2025-01-13 12:26:24.426383574 +0900
+@@ -160,15 +160,18 @@
+         self.addSeparator()
+ 
+         self.addAction(actions.cut)
+         self.addAction(actions.copy)
+         self.addAction(actions.copy_results)
+         self.addAction(actions.paste)
+-        self.addAction(actions.paste)
++        #self.addAction(actions.paste)
+ 
+         self.addSeparator()
++        self.addAction(actions.show_frozen)
++        self.addAction(actions.reset_frozen)
++        self.addSeparator()
+ 
+         self.addAction(actions.sort_ascending)
+         self.addAction(actions.sort_descending)
+ 
+         self.addSeparator()
+ 

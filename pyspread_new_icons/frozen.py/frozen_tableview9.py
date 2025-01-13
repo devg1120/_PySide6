@@ -8,22 +8,21 @@ from PySide6.QtUiTools import *
 
 
 class Freeze_TableWidget(QTableView):
-    def __init__(self):
+    def __init__(self, model):
         super(Freeze_TableWidget, self).__init__()
 
-        #self.fp_x = 2  # -
-        #self.fp_y = 3  # |
-        self.fp_x = 0  # -
-        self.fp_y = 0  # |
+        self.fp_x = 2  # -
+        self.fp_y = 3  # |
+        #self.fp_x = 0  # -
+        #self.fp_y = 0  # |
 
-    def init(self, model_):
-        self._model = model_
-        self.setModel(model_)
+        self.setModel(model)
 
         self.frozenCol_TableView = QTableView(self)
         self.frozenRow_TableView = QTableView(self)
         self.corner_TableView = QTableView(self)
 
+        self.init()
 
         for x in range(self.fp_x):
             self.horizontalHeader().setSectionResizeMode(x, QHeaderView.Fixed)
@@ -44,7 +43,8 @@ class Freeze_TableWidget(QTableView):
             self.frozenRow_TableView.horizontalScrollBar().setValue)
 
 
-        self.frozenCol_TableView.setModel(model_)
+    def init(self):
+        self.frozenCol_TableView.setModel(self.model())
         self.frozenCol_TableView.setFocusPolicy(Qt.NoFocus)
         self.frozenCol_TableView.verticalHeader().hide()
         self.frozenCol_TableView.horizontalHeader().setSectionResizeMode(
@@ -56,14 +56,14 @@ class Freeze_TableWidget(QTableView):
 
         self.frozenCol_TableView.setStyleSheet('''
             QTableView { border: none;
-                         background-color: none;
+                         background-color: red;
                          selection-background-color: #999;
                          border-right: 2px solid green;
             }''') # for demo purposes
 
         self.frozenCol_TableView.setSelectionModel(self.selectionModel())
         #for col in range(1, self.model().columnCount()):
-        for col in range(self.fp_x,model_.columnCount()):
+        for col in range(self.fp_x, self.model().columnCount()):
             self.frozenCol_TableView.setColumnHidden(col, True)
 
         self.frozenCol_TableView.setColumnWidth(0, self.columnWidth(0))
@@ -72,7 +72,7 @@ class Freeze_TableWidget(QTableView):
         self.frozenCol_TableView.show()
 
         ####
-        self.frozenRow_TableView.setModel(model_)
+        self.frozenRow_TableView.setModel(self.model())
         self.frozenRow_TableView.setFocusPolicy(Qt.NoFocus)
         self.frozenRow_TableView.horizontalHeader().hide()
         self.frozenRow_TableView.verticalHeader().setSectionResizeMode(
@@ -82,14 +82,14 @@ class Freeze_TableWidget(QTableView):
 
         self.frozenRow_TableView.setStyleSheet('''
             QTableView { border: none;
-                         background-color: none;
+                         background-color: blue;
                          selection-background-color: #999;
                          border-bottom: 2px solid green;
             }''') # for demo purposes
 
         self.frozenRow_TableView.setSelectionModel(self.selectionModel())
         #for row in range(1, self.model().rowCount()):
-        for row in range(self.fp_y, model_.rowCount()):
+        for row in range(self.fp_y, self.model().rowCount()):
             self.frozenRow_TableView.setRowHidden(row, True)
         self.frozenRow_TableView.verticalHeader().setFixedWidth(self.verticalHeader().width())
         self.frozenRow_TableView.setRowHeight(0, self.rowHeight(0))
@@ -98,7 +98,7 @@ class Freeze_TableWidget(QTableView):
         self.frozenRow_TableView.show()
 
         ####
-        self.corner_TableView.setModel(model_)
+        self.corner_TableView.setModel(self.model())
         self.corner_TableView.setFocusPolicy(Qt.NoFocus)
         self.corner_TableView.horizontalHeader().hide()
         self.corner_TableView.verticalHeader().hide()
@@ -117,9 +117,9 @@ class Freeze_TableWidget(QTableView):
             }''') # for demo purposes
 
         self.corner_TableView.setSelectionModel(self.selectionModel())
-        for row in range(self.fp_y, model_.rowCount()):
+        for row in range(self.fp_y, self.model().rowCount()):
             self.corner_TableView.setRowHidden(row, True)
-        for col in range(self.fp_x, model_.columnCount()):
+        for col in range(self.fp_x, self.model().columnCount()):
             self.corner_TableView.setColumnHidden(col, True)
         self.corner_TableView.verticalHeader().setFixedWidth(self.verticalHeader().width())
         self.corner_TableView.setRowHeight(0, self.rowHeight(0))
@@ -146,32 +146,6 @@ class Freeze_TableWidget(QTableView):
                          selection-background-color: #999;
             }''') # for demo purposes
 
-    def reset_fp(self):
-        for col in range(0, self._model.columnCount()):
-            self.frozenCol_TableView.setColumnHidden(col, False)
-        for row in range(0, self._model.rowCount()):
-            self.frozenRow_TableView.setRowHidden(row, False)
-        for row in range(0, self._model.rowCount()):
-            self.corner_TableView.setRowHidden(row, False)
-        for col in range(0, self._model.columnCount()):
-            self.corner_TableView.setColumnHidden(col, False)
-
-        for x in range(self.fp_x):
-            self.horizontalHeader().setSectionResizeMode(x, QHeaderView.Fixed)
-        for y in range(self.fp_y):
-            self.verticalHeader().setSectionResizeMode(y, QHeaderView.Fixed)
-        for col in range(self.fp_x,self._model.columnCount()):
-            self.frozenCol_TableView.setColumnHidden(col, True)
-        for row in range(self.fp_y, self._model.rowCount()):
-            self.frozenRow_TableView.setRowHidden(row, True)
-        for row in range(self.fp_y, self._model.rowCount()):
-            self.corner_TableView.setRowHidden(row, True)
-        for col in range(self.fp_x, self._model.columnCount()):
-            self.corner_TableView.setColumnHidden(col, True)
-
-        self.frozenCol_TableView.updateGeometries()
-        self.frozenRow_TableView.updateGeometries()
-        self.corner_TableView.updateGeometries()
 
     def updateSectionWidth(self, logicalIndex, oldSize, newSize):
         #print("Base Width", logicalIndex)
@@ -242,7 +216,7 @@ class Freeze_TableWidget(QTableView):
         super(Freeze_TableWidget, self).resizeEvent(event)
         self.updateFrozenTableGeometry()
 
-    def moveCursor_1(self, cursorAction, modifiers):
+    def moveCursor_(self, cursorAction, modifiers):
         current = super(Freeze_TableWidget, self).moveCursor(cursorAction, modifiers)
         return current
 
@@ -259,7 +233,7 @@ class Freeze_TableWidget(QTableView):
 
     def moveCursor(self, cursorAction, modifiers):
         current = super(Freeze_TableWidget, self).moveCursor(cursorAction, modifiers)
-
+   
         total_width = 0
         for i in range(self.fp_x ):
                total_width += self.columnWidth(i)
@@ -285,9 +259,9 @@ class Freeze_TableWidget(QTableView):
             self.verticalScrollBar().setValue(newValue)
         return current
 
-    #def scrollTo(self, index, hint):
-    #    if index.column() > 0:
-    #        super(Freeze_TableWidget, self).scrollTo(index, hint)
+    def scrollTo_(self, index, hint):
+        if index.column() > 0:
+            super(Freeze_TableWidget, self).scrollTo(index, hint)
 
     def updateFrozenTableGeometry(self):
         total_width = 0
@@ -358,8 +332,7 @@ def main(args):
                 #print(row)
                 #print(line)
     file.close()
-    tableView = Freeze_TableWidget()
-    tableView.init(model)
+    tableView = Freeze_TableWidget(model)
     tableView.setWindowTitle("Frozen Column Example")
     tableView.resize(860, 680)
     #tableView.resize(560, 380)
