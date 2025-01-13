@@ -159,22 +159,15 @@ class Freeze_TableWidget(QTableView):
             }''') # for demo purposes
         #self.itemChanged.connect(self.on_cell_changed)
 
-
+    """
     def dataChanged(self, topLeft, bottomRight, roles):
         print("dataChanged")
         ##self.moveCursor(QAbstractItemView.MoveDown,Qt.NoModifier)
-        i = self.currentIndex()
+        #i = self.currentIndex()
         e = QKeyEvent(QEvent.KeyPress, Qt.Key_Down , Qt.NoModifier)
         #self.selectionCommand(i,e)
         QCoreApplication.postEvent(self, e)
-
-        ##print(i.column(), i.row())
-        #c = i.column()
-        #r = i.row()
-        #p = i.internalId()
-        ##new_i = self.selectionModel().createIndex(r + 1,i,p)
-        ##new_i = i.model().subling(r + 1,i)
-        #self.setCurrentIndex(i)
+   """
 
     def currentChanged(self, current, previous):
         print("currentChanged")

@@ -56,7 +56,7 @@ from PySide6.QtGui \
 #            QRect, QRectF, QItemSelectionModel, QObject, QAbstractItemModel,
 #            QByteArray, Signal)
 from PySide6.QtCore \
-    import (Qt, QAbstractTableModel, QModelIndex,  QEvent, QSize,
+    import (Qt, QAbstractTableModel, QModelIndex,  QEvent, QSize, QCoreApplication,
             QRect, QRectF, QItemSelectionModel, QObject, QAbstractItemModel,
             QByteArray, Signal)
 
@@ -121,6 +121,7 @@ FONTSTYLES = (QFont.Style.StyleNormal,
               QFont.Style.StyleOblique)
 
 
+## class QAbstractItemView
 #class Grid(QTableView):
 class Grid(Freeze_TableWidget):
     """The main grid of pyspread"""
@@ -210,6 +211,23 @@ class Grid(Freeze_TableWidget):
         # Store initial viewport
         self.table_scrolls = {0: (self.verticalScrollBar().value(),
                                   self.horizontalScrollBar().value())}
+    ## class QAbstractItemView
+    """
+    def closeEditor(editor, hint):
+        super().closeEditor(editor, hint)
+        print("closeEditor")
+        e = QKeyEvent(QEvent.KeyPress, Qt.Key_Down , Qt.NoModifier)
+        QCoreApplication.postEvent(self, e)
+    """
+    
+    def dataChanged(self, topLeft, bottomRight, roles):
+        super().dataChanged(topLeft, bottomRight, roles)
+        cindex = self.currentIndex()
+        if  cindex.column() == topLeft.column() and  \
+            cindex.row()    == topLeft.row():
+          print("dataChanged" )
+          e = QKeyEvent(QEvent.KeyPress, Qt.Key_Down , Qt.NoModifier)
+          QCoreApplication.postEvent(self, e)
 
     @contextmanager
     def undo_resizing_row(self):
