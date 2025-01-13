@@ -6,30 +6,17 @@ from PySide6.QtCore import *
 from PySide6.QtGui import *      
 from PySide6.QtUiTools import *
 
-def itemChanged(item):
-    print("update")
 
-########################## class QAbstractItemView
 class Freeze_TableWidget(QTableView):
-#class Freeze_TableWidget(QTableWidget):
     def __init__(self):
-        #super(Freeze_TableWidget, self).__init__()
-        super().__init__()
+        super(Freeze_TableWidget, self).__init__()
 
         #self.fp_x = 2  # -
         #self.fp_y = 3  # |
         self.fp_x = 2  # -
         self.fp_y = 2  # |
-        #self.itemChanged.connect(self.on_itemChanged)
-        #self.itemChanged.connect(itemChanged)
-        #self.itemChanged.connect(self.cell_updated)
-
-
-
 
     def init(self, model_):
-        #self.itemChanged.connect(self.on_itemChanged)
-
         self.setModel(model_)
 
         self.frozenCol_TableView = QTableView(self)
@@ -157,20 +144,7 @@ class Freeze_TableWidget(QTableView):
                          background-color: none ;
                          selection-background-color: #999;
             }''') # for demo purposes
-        #self.itemChanged.connect(self.on_cell_changed)
 
-    """
-    def dataChanged(self, topLeft, bottomRight, roles):
-        print("dataChanged")
-        ##self.moveCursor(QAbstractItemView.MoveDown,Qt.NoModifier)
-        #i = self.currentIndex()
-        e = QKeyEvent(QEvent.KeyPress, Qt.Key_Down , Qt.NoModifier)
-        #self.selectionCommand(i,e)
-        QCoreApplication.postEvent(self, e)
-   """
-
-    def currentChanged(self, current, previous):
-        print("currentChanged")
 
     def updateSectionWidth(self, logicalIndex, oldSize, newSize):
         #print("Base Width", logicalIndex)
@@ -257,7 +231,6 @@ class Freeze_TableWidget(QTableView):
         return current
 
     def moveCursor(self, cursorAction, modifiers):
-        print("moveCursor")
         current = super(Freeze_TableWidget, self).moveCursor(cursorAction, modifiers)
 
         total_width = 0
