@@ -162,7 +162,7 @@ class Freeze_TableWidget(QTableView):
             self.verticalHeader().setSectionResizeMode(y, QHeaderView.Fixed)
         for col in range(self.fp_x,self._model.columnCount()):
             self.frozenCol_TableView.setColumnHidden(col, True)
-        for row in range(self.fp_y, model_.rowCount()):
+        for row in range(self.fp_y, self._model.rowCount()):
             self.frozenRow_TableView.setRowHidden(row, True)
         for row in range(self.fp_y, self._model.rowCount()):
             self.corner_TableView.setRowHidden(row, True)
@@ -242,7 +242,7 @@ class Freeze_TableWidget(QTableView):
         super(Freeze_TableWidget, self).resizeEvent(event)
         self.updateFrozenTableGeometry()
 
-    def moveCursor_(self, cursorAction, modifiers):
+    def moveCursor_1(self, cursorAction, modifiers):
         current = super(Freeze_TableWidget, self).moveCursor(cursorAction, modifiers)
         return current
 

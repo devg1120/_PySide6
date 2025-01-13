@@ -99,6 +99,7 @@ class IconPath:
     toggle_periodic_updates = ACTION_PATH / 'view-timer.svg'
     #show_frozen = ACTION_PATH / 'view-show-frozen.svg'
     show_frozen = ACTION_PATH / 'layout.svg'
+    reset_frozen = ACTION_PATH / 'square.svg'
 
     # Format menu icons
     copy_format = ACTION_PATH / 'format-copy.svg'

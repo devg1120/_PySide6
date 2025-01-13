@@ -729,6 +729,11 @@ class MainWindow(QMainWindow):
         if self.active_grid != None:
            self.active_grid.set_frozen()
 
+    def on_reset_frozen(self):
+        print("on_reset_frozen")
+        if self.active_grid != None:
+           self.active_grid.reset_frozen()
+
     def on_about(self):
         """Show about message box"""
 

@@ -228,6 +228,7 @@ class Grid(Freeze_TableWidget):
           print("dataChanged" )
           e = QKeyEvent(QEvent.KeyPress, Qt.Key_Down , Qt.NoModifier)
           QCoreApplication.postEvent(self, e)
+
     def set_frozen(self):
         print("grid set Frozen:")
         index = self.currentIndex()
@@ -236,9 +237,18 @@ class Grid(Freeze_TableWidget):
         self.reset_fp()
         self.updateFrozenTableGeometry()
 
+    def reset_frozen(self):
+        print("grid reset Frozen:")
+        index = self.currentIndex()
+        self.fp_x =  0
+        self.fp_y =  0
+        self.reset_fp()
+        self.updateFrozenTableGeometry()
+
  
     def currentChanged(self, current, previous):
-        print("currentChanged:")
+        super().currentChanged( current, previous)
+        #print("currentChanged:")
         self.main_window.active_grid = self
 
     @contextmanager

@@ -417,6 +417,13 @@ class MainWindowActions(AttrDict):
                                   statustip='Indicates frozen cells with a '
                                             'background crosshatch')
 
+        self.reset_frozen = Action(self.parent, "Reset frozen",
+                                  #self.parent.grid.on_show_frozen_pressed,
+                                  self.parent.on_reset_frozen,
+                                  icon=Icon.reset_frozen,
+                                  checkable=True,
+                                  statustip='Indicates frozen cells with a '
+                                            'background crosshatch')
     def create_format_actions(self):
         """actions for Format menu"""
 

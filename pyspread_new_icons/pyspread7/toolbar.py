@@ -167,6 +167,7 @@ class MainToolBar(ToolBarBase):
 
         self.addSeparator()
         self.addAction(actions.show_frozen)
+        self.addAction(actions.reset_frozen)
         self.addSeparator()
 
         self.addAction(actions.sort_ascending)
