@@ -135,6 +135,7 @@ class Grid(Freeze_TableWidget):
 
         super().__init__()
 
+
         self.main_window = main_window
 
         shape = main_window.settings.shape
@@ -330,7 +331,7 @@ class Grid(Freeze_TableWidget):
         :param value: Key of cell to be made current
 
         """
-
+        print("grid set current:", value)
         if len(value) not in (2, 3):
             msg = "Current cell must be defined with a tuple " + \
                   "(row, column) or (rol, column, table)."
@@ -914,6 +915,7 @@ class Grid(Freeze_TableWidget):
         self.main_window.undo_stack.push(command)
 
     def on_italics_pressed(self, toggled: bool):
+        print("on_italics_pressed")
         """Italics button pressed event handler
 
         :param toggled: Toggle state
@@ -1249,10 +1251,11 @@ class Grid(Freeze_TableWidget):
         self.main_window.undo_stack.push(command)
 
     def on_borderwidth(self):
+        print("on_borderwidth")
         """Border width change event handler"""
 
         width = int(self.sender().text().split()[-1])
-
+        print(width)
         border_choice = self.main_window.settings.border_choice
         bottom_selection = \
             self.selection.get_bottom_borders_selection(border_choice,
@@ -1269,6 +1272,7 @@ class Grid(Freeze_TableWidget):
                                    attr_dict_right)
 
         idx_string = self._selected_idx_to_str(self.selected_idx)
+        print(idx_string)
         description = f"Set border width to {width} for cells {idx_string}"
         command = commands.SetCellFormat(attr_bottom, self.model,
                                          self.currentIndex(),

@@ -552,7 +552,8 @@ class MainWindowActions(AttrDict):
                                             'executed only when pressed')
 
         self.merge_cells = Action(self.parent, "Merge cells",
-                                  self.parent.grid.on_merge_pressed,
+                                  #self.parent.grid.on_merge_pressed,
+                                  self.parent.on_merge_pressed,
                                   icon=Icon.merge_cells,
                                   checkable=True,
                                   statustip='Merge/unmerge selected cells')

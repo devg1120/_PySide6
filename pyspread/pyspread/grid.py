@@ -1194,6 +1194,8 @@ class Grid(QTableView):
         self.gui_update()
 
         attr_dict = AttrDict([("bgcolor", bg_color_rgb)])
+
+        print(self.selection)
         attr = CellAttribute(self.selection, self.table, attr_dict)
         idx_string = self._selected_idx_to_str(self.selected_idx)
         description = f"Set cell background color to {bg_color_rgb} for " +\

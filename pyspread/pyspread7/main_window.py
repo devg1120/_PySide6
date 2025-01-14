@@ -732,6 +732,11 @@ class MainWindow(QMainWindow):
         if self.active_grid != None:
            self.active_grid.reset_frozen()
 
+    def on_merge_pressed(self):
+        print("on_merge_pressed")
+        for grid in self.grids:
+               grid.on_merge_pressed()
+
     def on_about(self):
         """Show about message box"""
 
