@@ -388,7 +388,7 @@ class MainWindow(QMainWindow):
     def update_action_toggles(self):
         """Updates the toggle menu check states"""
 
-        #GUSA actions = self.main_window_actions
+        actions = self.main_window_actions
 
         maintoolbar_visible = self.main_toolbar.isVisibleTo(self)
         #actions.toggle_main_toolbar.setChecked(maintoolbar_visible)
@@ -397,7 +397,7 @@ class MainWindow(QMainWindow):
         #actions.toggle_macro_toolbar.setChecked(macrotoolbar_visible)
 
         formattoolbar_visible = self.format_toolbar.isVisibleTo(self)
-        #actions.toggle_format_toolbar.setChecked(formattoolbar_visible)
+        actions.toggle_format_toolbar.setChecked(formattoolbar_visible)
 
         findtoolbar_visible = self.find_toolbar.isVisibleTo(self)
         #actions.toggle_find_toolbar.setChecked(findtoolbar_visible)
@@ -785,6 +785,7 @@ class MainWindow(QMainWindow):
         :param attributes: Attributes of current cell
 
         """
+        print("main on_gui_update")
 
         widgets = self.widgets
         menubar = self.menuBar()

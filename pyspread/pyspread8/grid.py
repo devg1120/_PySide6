@@ -159,10 +159,10 @@ class Grid(Freeze_TableWidget):
         self.widget_indices = []  # Store each index with an indexWidget here
 
         # Signals
-        self.model.dataChanged.connect(self.on_data_changed)
-        self.selectionModel().currentChanged.connect(self.on_current_changed)
-        self.selectionModel().selectionChanged.connect(
-            self.on_selection_changed)
+        #self.model.dataChanged.connect(self.on_data_changed)
+        #self.selectionModel().currentChanged.connect(self.on_current_changed)
+        #self.selectionModel().selectionChanged.connect(
+        #    self.on_selection_changed)
 
         self.setHorizontalHeader(GridHeaderView(Qt.Orientation.Horizontal,
                                                 self))
@@ -179,7 +179,7 @@ class Grid(Freeze_TableWidget):
         # Palette adjustment for cases in  which the Base color is not white
         palette = self.palette()
         palette.setColor(QPalette.ColorRole.Base,
-                         QColor(*DefaultCellAttributeDict().bgcolor))
+                          QColor(*DefaultCellAttributeDict().bgcolor))
         self.setPalette(palette)
 
         self.setCornerButtonEnabled(False)
@@ -222,16 +222,18 @@ class Grid(Freeze_TableWidget):
     """
     def init(self, model) :
         super().init(model)
+
         self.delegate = GridCellDelegate(self.main_window, self,
                                          model.code_array)
         self.setItemDelegate(self.delegate)
 
     def dataChanged(self, topLeft, bottomRight, roles):
+        print("dataChange", topLeft, bottomRight)
         super().dataChanged(topLeft, bottomRight, roles)
         cindex = self.currentIndex()
         if  cindex.column() == topLeft.column() and  \
             cindex.row()    == topLeft.row():
-          print("dataChanged" )
+          print("down allow" )
           e = QKeyEvent(QEvent.KeyPress, Qt.Key_Down , Qt.NoModifier)
           QCoreApplication.postEvent(self, e)
 
@@ -658,6 +660,8 @@ class Grid(Freeze_TableWidget):
     def on_data_changed(self):
         """Event handler for data changes"""
 
+        print("on_data_changed")
+
         self.qcolor_cache.clear()
         self.borderwidth_bottom_cache.clear()
         self.borderwidth_right_cache.clear()
@@ -669,9 +673,11 @@ class Grid(Freeze_TableWidget):
             self.main_window.settings.changed_since_save = True
             main_window_title = "* " + self.main_window.windowTitle()
             self.main_window.setWindowTitle(main_window_title)
+        self.gui_update()
 
     def on_current_changed(self, *_: Any):
         """Event handler for change of current cell"""
+        print("on_current_changed")
 
         if self.selection_mode_exiting:
             # Do not update entry_line to preserve selection
@@ -695,6 +701,7 @@ class Grid(Freeze_TableWidget):
                                QTextCursor.MoveMode.KeepAnchor)
             self.main_window.entry_line.setTextCursor(cursor)
         else:
+            print("on current change")
             code = self.model.code_array(self.current)
             self.main_window.entry_line.setPlainText(code)
             self.gui_update()
@@ -1257,6 +1264,7 @@ class Grid(Freeze_TableWidget):
         command = commands.SetCellFormat(attr, self.model, self.currentIndex(),
                                          self.selected_idx, description)
         self.main_window.undo_stack.push(command)
+        #print("end on_background_color")
 
     def on_borderwidth(self):
         print("on_borderwidth")
@@ -2109,7 +2117,7 @@ class GridTableModel(QAbstractTableModel):
         :param table: Table for which data shall is set
 
         """
-
+        print("grid setData")
         if role == Qt.ItemDataRole.EditRole:
             if table is None:
                 key = self.current(index)

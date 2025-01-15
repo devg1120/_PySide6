@@ -715,7 +715,7 @@ class MainWindow(QMainWindow):
         :param attributes: Attributes of current cell
 
         """
-
+        print("on_gui_update")
         widgets = self.widgets
         menubar = self.menuBar()
 

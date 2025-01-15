@@ -647,6 +647,7 @@ class Grid(QTableView):
         else:
             code = self.model.code_array(self.current)
             self.main_window.entry_line.setPlainText(code)
+            print("1 self.gui_update()")
             self.gui_update()
 
     def on_selection_changed(self):
@@ -1139,6 +1140,7 @@ class Grid(QTableView):
         """Border choice style event handler"""
 
         self.main_window.settings.border_choice = self.sender().text()
+        print("2 self.gui_update()")
         self.gui_update()
 
     def on_text_color(self):

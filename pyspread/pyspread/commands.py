@@ -838,7 +838,7 @@ class SetCellFormat(QUndoCommand):
 
     def redo(self):
         """Redo cell formatting"""
-
+        print("redo", self.selected_idx, self.attr)
         self.model.setData(self.selected_idx, self.attr,
                            Qt.ItemDataRole.DecorationRole)
         self.model.dataChanged.emit(QModelIndex(), QModelIndex())
