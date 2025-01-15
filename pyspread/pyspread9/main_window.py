@@ -733,7 +733,6 @@ class MainWindow(QMainWindow):
     #       self.active_grid.set_frozen()
 
     def on_set_frozen(self):
-        print("on_set_frozen")
         if  self._last_focused_grid != None:
            self._last_focused_grid.set_frozen()
 
@@ -743,14 +742,13 @@ class MainWindow(QMainWindow):
     #       self.active_grid.reset_frozen()
 
     def on_reset_frozen(self):
-        print("on_reset_frozen")
         if self._last_focused_grid != None:
            self._last_focused_grid.reset_frozen()
 
     def on_merge_pressed(self):
-        print("on_merge_pressed")
-        for grid in self.grids:
-               grid.on_merge_pressed()
+        self.grids[0].on_merge_pressed()
+        #for grid in self.grids:
+        #       grid.on_merge_pressed()
 
     def on_about(self):
         """Show about message box"""
@@ -795,7 +793,6 @@ class MainWindow(QMainWindow):
         :param attributes: Attributes of current cell
 
         """
-        print("on_gui_update")
 
         widgets = self.widgets
         menubar = self.menuBar()

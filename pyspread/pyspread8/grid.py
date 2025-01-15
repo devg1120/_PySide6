@@ -1417,6 +1417,7 @@ class Grid(Freeze_TableWidget):
         shape[0] -= 1
         shape[1] -= 1
         bbox = self.selection.get_grid_bbox(shape)
+        print("on_merge_pressed", bbox)
         (top, left), (bottom, right) = bbox
 
         # Check if current cell is already merged
@@ -1440,6 +1441,7 @@ class Grid(Freeze_TableWidget):
         self.main_window.undo_stack.push(command)
 
         grid.current = top, left
+        print("on_merge_pressed end")
 
     def on_quote(self):
         """Quote cells event handler"""
