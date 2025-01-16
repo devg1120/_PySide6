@@ -1,0 +1,10 @@
+
+main_window.py
+  def on_paint_request(self, printer: QPrinter):
+
+          painter = QPainter(printer)
+        option = QStyleOptionViewItem()
+        painter.setRenderHints(QPainter.RenderHint.SmoothPixmapTransform)
+
+
+
