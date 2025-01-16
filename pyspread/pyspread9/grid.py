@@ -164,23 +164,23 @@ class Grid(Freeze_TableWidget):
         self.selectionModel().selectionChanged.connect(
             self.on_selection_changed)
 
-        self.setHorizontalHeader(GridHeaderView(Qt.Orientation.Horizontal,
-                                                self))
-        self.setVerticalHeader(GridHeaderView(Qt.Orientation.Vertical, self))
+        #self.setHorizontalHeader(GridHeaderView(Qt.Orientation.Horizontal,
+        #                                        self))
+        #self.setVerticalHeader(GridHeaderView(Qt.Orientation.Vertical, self))
 
-        self.verticalHeader().setDefaultSectionSize(
-            self.main_window.settings.default_row_height)
-        self.horizontalHeader().setDefaultSectionSize(
-            self.main_window.settings.default_column_width)
+        #self.verticalHeader().setDefaultSectionSize(
+        #    self.main_window.settings.default_row_height)
+        #self.horizontalHeader().setDefaultSectionSize(
+        #    self.main_window.settings.default_column_width)
 
-        self.verticalHeader().setMinimumSectionSize(0)
-        self.horizontalHeader().setMinimumSectionSize(0)
+        #self.verticalHeader().setMinimumSectionSize(0)
+        #self.horizontalHeader().setMinimumSectionSize(0)
 
         # Palette adjustment for cases in  which the Base color is not white
-        #palette = self.palette()
-        #palette.setColor(QPalette.ColorRole.Base,
-        #                  QColor(*DefaultCellAttributeDict().bgcolor))
-        #self.setPalette(palette)
+        palette = self.palette()
+        palette.setColor(QPalette.ColorRole.Base,
+                          QColor(*DefaultCellAttributeDict().bgcolor))
+        self.setPalette(palette)
 
         self.setCornerButtonEnabled(False)
 
@@ -1386,7 +1386,6 @@ class Grid(Freeze_TableWidget):
         shape[0] -= 1
         shape[1] -= 1
         bbox = self.selection.get_grid_bbox(shape)
-        print("on_merge_pressed",bbox)
         (top, left), (bottom, right) = bbox
         # Check if current cell is already merged
         if self.columnSpan(top, left) > 1 or self.rowSpan(top, left) > 1:
@@ -1409,7 +1408,6 @@ class Grid(Freeze_TableWidget):
         self.main_window.undo_stack.push(command)
 
         grid.current = top, left
-        print("on_merge_pressed end")
 
 
     def on_quote(self):

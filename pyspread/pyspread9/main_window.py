@@ -95,7 +95,7 @@ LICENSE = "GNU GENERAL PUBLIC LICENSE Version 3"
 
 os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
 
-
+ABC="ABC123"
 class MainWindow(QMainWindow):
     """Pyspread main window"""
 

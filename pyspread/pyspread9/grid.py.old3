@@ -133,7 +133,7 @@ class Grid(Freeze_TableWidget):
 
         """
 
-        super().__init__()
+        super().__init__(model)
 
 
         self.main_window = main_window
@@ -145,7 +145,7 @@ class Grid(Freeze_TableWidget):
         else:
             self.model = model
 
-        self.setModel(self.model)
+        #self.setModel(self.model)
 
         self.qcolor_cache = QColorCache(self)
         self.borderwidth_bottom_cache = BorderWidthBottomCache(self)
@@ -177,10 +177,10 @@ class Grid(Freeze_TableWidget):
         self.horizontalHeader().setMinimumSectionSize(0)
 
         # Palette adjustment for cases in  which the Base color is not white
-        #palette = self.palette()
-        #palette.setColor(QPalette.ColorRole.Base,
-        #                  QColor(*DefaultCellAttributeDict().bgcolor))
-        #self.setPalette(palette)
+        palette = self.palette()
+        palette.setColor(QPalette.ColorRole.Base,
+                          QColor(*DefaultCellAttributeDict().bgcolor))
+        self.setPalette(palette)
 
         self.setCornerButtonEnabled(False)
 
@@ -195,9 +195,9 @@ class Grid(Freeze_TableWidget):
         #self.setShowGrid(False)
         self.setShowGrid(True)
 
-        #self.delegate = GridCellDelegate(main_window, self,
-        #                                 self.model.code_array)
-        #self.setItemDelegate(self.delegate)
+        self.delegate = GridCellDelegate(main_window, self,
+                                         self.model.code_array)
+        self.setItemDelegate(self.delegate)
 
         # Select upper left cell because initial selection behaves strange
         self.reset_selection()
@@ -213,31 +213,16 @@ class Grid(Freeze_TableWidget):
         self.table_scrolls = {0: (self.verticalScrollBar().value(),
                                   self.horizontalScrollBar().value())}
     ## class QAbstractItemView
-    """
-    def closeEditor(editor, hint):
-        super().closeEditor(editor, hint)
-        print("closeEditor")
-        e = QKeyEvent(QEvent.KeyPress, Qt.Key_Down , Qt.NoModifier)
-        QCoreApplication.postEvent(self, e)
-    """
-    def init(self, model) :
-        super().init(model)
-        self.delegate = GridCellDelegate(self.main_window, self,
-                                         model.code_array)
-        self.setItemDelegate(self.delegate)
 
     def dataChanged(self, topLeft, bottomRight, roles):
-        print("dataChange", topLeft, bottomRight)
         super().dataChanged(topLeft, bottomRight, roles)
         cindex = self.currentIndex()
         if  cindex.column() == topLeft.column() and  \
             cindex.row()    == topLeft.row():
-          print("down allow" )
           e = QKeyEvent(QEvent.KeyPress, Qt.Key_Down , Qt.NoModifier)
           QCoreApplication.postEvent(self, e)
 
     def set_frozen(self):
-        print("grid set Frozen:")
         index = self.currentIndex()
         self.fp_x = index.column() 
         self.fp_y = index.row() 
@@ -245,7 +230,6 @@ class Grid(Freeze_TableWidget):
         self.updateFrozenTableGeometry()
 
     def reset_frozen(self):
-        print("grid reset Frozen:")
         index = self.currentIndex()
         self.fp_x =  0
         self.fp_y =  0
@@ -255,8 +239,6 @@ class Grid(Freeze_TableWidget):
  
     def currentChanged(self, current, previous):
         super().currentChanged( current, previous)
-        #print("currentChanged:")
-        self.main_window.active_grid = self
 
 
     @contextmanager
@@ -337,7 +319,6 @@ class Grid(Freeze_TableWidget):
         :param value: Key of cell to be made current
 
         """
-        print("grid set current:", value)
         if len(value) not in (2, 3):
             msg = "Current cell must be defined with a tuple " + \
                   "(row, column) or (rol, column, table)."
@@ -659,8 +640,6 @@ class Grid(Freeze_TableWidget):
     def on_data_changed(self):
         """Event handler for data changes"""
 
-        print("on_data_changed")
-        return
 
         self.qcolor_cache.clear()
         self.borderwidth_bottom_cache.clear()
@@ -924,7 +903,6 @@ class Grid(Freeze_TableWidget):
         self.main_window.undo_stack.push(command)
 
     def on_italics_pressed(self, toggled: bool):
-        print("on_italics_pressed")
         """Italics button pressed event handler
 
         :param toggled: Toggle state
@@ -1244,12 +1222,10 @@ class Grid(Freeze_TableWidget):
         self.main_window.undo_stack.push(command)
 
     def on_background_color(self):
-        print("on_background_color")
         """Background color change event handler"""
 
         bg_color = self.main_window.widgets.background_color_button.color
         bg_color_rgb = bg_color.getRgb()
-        print(bg_color_rgb, self.selection)
         self.gui_update()
 
         attr_dict = AttrDict([("bgcolor", bg_color_rgb)])
@@ -1261,14 +1237,11 @@ class Grid(Freeze_TableWidget):
         command = commands.SetCellFormat(attr, self.model, self.currentIndex(),
                                          self.selected_idx, description)
         self.main_window.undo_stack.push(command)
-        #print("end on_background_color")
 
     def on_borderwidth(self):
-        print("on_borderwidth")
         """Border width change event handler"""
 
         width = int(self.sender().text().split()[-1])
-        print(width)
         border_choice = self.main_window.settings.border_choice
         bottom_selection = \
             self.selection.get_bottom_borders_selection(border_choice,
@@ -1285,7 +1258,6 @@ class Grid(Freeze_TableWidget):
                                    attr_dict_right)
 
         idx_string = self._selected_idx_to_str(self.selected_idx)
-        print(idx_string)
         description = f"Set border width to {width} for cells {idx_string}"
         command = commands.SetCellFormat(attr_bottom, self.model,
                                          self.currentIndex(),
@@ -1415,7 +1387,6 @@ class Grid(Freeze_TableWidget):
         shape[1] -= 1
         bbox = self.selection.get_grid_bbox(shape)
         (top, left), (bottom, right) = bbox
-
         # Check if current cell is already merged
         if self.columnSpan(top, left) > 1 or self.rowSpan(top, left) > 1:
             selection = Selection([], [], [], [], [(top, left)])
@@ -1437,6 +1408,7 @@ class Grid(Freeze_TableWidget):
         self.main_window.undo_stack.push(command)
 
         grid.current = top, left
+
 
     def on_quote(self):
         """Quote cells event handler"""
@@ -2114,7 +2086,6 @@ class GridTableModel(QAbstractTableModel):
         :param table: Table for which data shall is set
 
         """
-
         if role == Qt.ItemDataRole.EditRole:
             if table is None:
                 key = self.current(index)
