@@ -40,7 +40,7 @@ import sys
 import traceback
 
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QApplication
+from PySide6.QtWidgets import QApplication, QStyleFactory
 
 try:
     from pyspread.cli import PyspreadArgumentParser
@@ -76,6 +76,11 @@ def main():
     logging.basicConfig(level=args.loglevel)
 
     app = QApplication(sys.argv)
+
+    # https://forum.qt.io/topic/157773/pyside6-6-7-rounded-corners/6
+    # https://www.wizard-notes.com/entry/python/pyqt-style
+    print(QStyleFactory.keys())
+    app.setStyle('Fusion')
     app.setDesktopFileName("io.gitlab.pyspread.pyspread")
     main_window = MainWindow(args.file, default_settings=args.default_settings)
 

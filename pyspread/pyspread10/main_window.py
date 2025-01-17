@@ -273,10 +273,10 @@ class MainWindow(QMainWindow):
         model = GridTableModel(self, shape)
 
 
-        self.grid = Grid(self, model)
-        self.grid_2 = Grid(self, model)
-        self.grid_3 = Grid(self, model)
-        self.grid_4 = Grid(self, model)
+        self.grid = Grid(self, model=model,  name="GA")
+        self.grid_2 = Grid(self, model=model, name="GB")
+        self.grid_3 = Grid(self, model=model, name="GC")
+        self.grid_4 = Grid(self, model=model, name="GD")
 
         #self.grid.setModel(model)
         #self.grid_2.setModel(model)

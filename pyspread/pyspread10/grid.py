@@ -45,7 +45,7 @@ import numpy
 from PySide6.QtWidgets \
     import (QTableView, QStyledItemDelegate, QTabBar, QWidget, QMainWindow,
             QStyleOptionViewItem, QApplication, QStyle, QAbstractItemDelegate,
-            QHeaderView, QFontDialog, QInputDialog, QLineEdit,
+            QHeaderView, QFontDialog, QInputDialog, QLineEdit,QStyleOptionButton,
             QAbstractItemView)
 from PySide6.QtGui \
     import (QColor, QBrush, QFont, QPainter, QPalette, QImage, QKeyEvent, 
@@ -126,7 +126,7 @@ FONTSTYLES = (QFont.Style.StyleNormal,
 class Grid(Freeze_TableWidget):
     """The main grid of pyspread"""
 
-    def __init__(self, main_window: QMainWindow, model=None):
+    def __init__(self, main_window: QMainWindow, model=None , name="Grid"):
         """
         :param main_window: Application main window
         :param model: GridTableModel for grid
@@ -144,7 +144,9 @@ class Grid(Freeze_TableWidget):
             self.model = GridTableModel(main_window, shape)
         else:
             self.model = model
+            pass
 
+        self.name = name
         #self.setModel(self.model)
 
         self.qcolor_cache = QColorCache(self)
@@ -179,12 +181,12 @@ class Grid(Freeze_TableWidget):
         # Palette adjustment for cases in  which the Base color is not white
         # http://dorafop.my.coocan.jp/Qt/Qt105.html
         # 
-        p = self.palette()
-        p.setColor(QPalette.ColorRole.Base,
-                          QColor(*DefaultCellAttributeDict().bgcolor))
+        #p = self.palette()
+        #p.setColor(QPalette.ColorRole.Base,
+        #                  QColor(*DefaultCellAttributeDict().bgcolor))
 
-        p = self.palette()
-        #p.setColor(QPalette.ColorRole.Base      , "#a0a0a0")
+        #p = self.palette()
+        #p.setColor(QPalette.ColorRole.Base      , "#ffffff")
         #p.setColor(QPalette.ColorRole.Highlight , "#c0c0c0")
         #self.setPalette(p)
 
@@ -233,6 +235,10 @@ class Grid(Freeze_TableWidget):
         #                 selection-background-color: #999;
         #    }''') # for demo purposes
     ## class QAbstractItemView
+
+    def commitData(self, editor):
+        print(self.name, "grid commitData")
+        super().commitData(editor)
 
     def dataChanged(self, topLeft, bottomRight, roles):
         super().dataChanged(topLeft, bottomRight, roles)
@@ -2262,6 +2268,9 @@ class GridCellDelegate(QStyledItemDelegate):
         option.text = ""
         style.drawControl(QStyle.ControlElement.CE_ItemViewItem, option,
                           painter, option.widget)
+        #style.drawControl(QStyle.ControlElement.CE_CustomBase, option,
+        #style.drawControl(QStyle.ControlElement.CE_HeaderLabel, option,
+        #                  painter, option.widget)
 
         ctx = QAbstractTextDocumentLayout.PaintContext()
 
@@ -2551,7 +2560,19 @@ class GridCellDelegate(QStyledItemDelegate):
         :param index: Index of cell for which borders are drawn
 
         """
-        
+
+        #print(type(option))
+        #print(dir(option))
+        #print(option.decorationSize)
+        #print(option.backgroundBrush)
+        #print(option.features)
+        #print(option.OptionType)
+        #print(option.StyleOptionType)
+        #print(option.rect)
+        #option.features = QStyleOptionViewItem.Alternate | QStyleOptionViewItem.WrapText
+        #option.decorationSize = QSize(-1,-1)
+        #option = QStyleOptionViewItem()
+        #option.style = option_.style
         painter.setRenderHints(QPainter.RenderHint.LosslessImageRendering
                                | QPainter.RenderHint.Antialiasing
                                | QPainter.RenderHint.TextAntialiasing
@@ -2562,12 +2583,12 @@ class GridCellDelegate(QStyledItemDelegate):
         renderer = self.cell_attributes[key].renderer
 
         old_rect = option.rect
-        #option.rect = QRect(int(rect.x()), int(rect.y()),
-        #                    int(rect.width() + 1.5),
-        #                    int(rect.height() + 1.5))
-        option.rect = QRect(int(rect.x()-1), int(rect.y() -1),    #GUSA
-                            int(rect.width() + 4.5),
-                            int(rect.height() + 4.5))
+        option.rect = QRect(int(rect.x()), int(rect.y()),
+                            int(rect.width() + 1.5),
+                            int(rect.height() + 1.5))
+        #option.rect = QRect(int(rect.x()-1), int(rect.y() -1),    #GUSA
+        #                    int(rect.width() + 4.5),
+        #                    int(rect.height() + 4.5))
 
         if renderer == "text":
             self._render_text(painter, rect, option, index)

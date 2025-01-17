@@ -336,7 +336,6 @@ class CellEdgeRenderer:
 
     def paint(self):
         """Paints the edge"""
-
         if not self.borders.width or not self.borders.height:
             return  # Invisible edge
 
@@ -899,7 +898,6 @@ class CellRenderer:
         """Paints the cell"""
 
         rect = QRectF(self.option.rect)
-        #rect = QRectF(5, 5, 100, 30)
 
         with painter_save(self.painter):
             self.painter.setClipRect(self.option.rect)
