@@ -523,8 +523,26 @@ class Grid(Freeze_TableWidget):
         """Overrides focusInEvent storing last focused grid in main_window"""
 
         self.main_window._last_focused_grid = self
+        #self.setStyleSheet('QTableView {border-width:3px; border-color: red;}')
+        #self.setStyleSheet("border-color: red;"
+        #        "border-width: 2px;")
+        self.setStyleSheet('''
+            QTableView { border: solid red;
+                         border-width: 3px ;
+            }''') # for demo purposes
+        self.gui_update()
 
         super().focusInEvent(event)
+
+    def focusOutEvent(self, event):
+        #self.setStyleSheet('QTableView {border-width:None; }')
+        #self.setStyleSheet("border-color: red;"
+        #        "border-width: 0px;")
+        self.setStyleSheet('''
+            QTableView { border: solid red;
+                         border-width: 0px ;
+            }''') # for demo purposes
+        self.gui_update()
 
     def closeEditor(self, editor: QWidget,
                     hint: QAbstractItemDelegate.EndEditHint):
