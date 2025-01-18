@@ -1,0 +1,60 @@
+
+inline SVG
+---------------------------------------------------
+from PySide6 import QtGui
+SVGSTR="""<svg height="30" width="200" xmlns="http://www.w3.org/2000/svg">
+  <a href="https://www.w3schools.com/graphics/" target="_blank">
+    <text x="5" y="15" fill="red">I love SVG!</text>
+  </a>
+</svg>"""
+encoded=SVGSTR.encode('utf-8')
+array=bytearray(encoded)
+img = QtGui.QImage.fromData(array, format="svg")
+
+
+from PySide6 import QtGui
+SVGSTR="""<svg height="30" width="200" xmlns="http://www.w3.org/2000/svg">
+  <a href="https://www.w3schools.com/graphics/" target="_blank">
+    <text x="5" y="15" fill="red">I love SVG!</text>
+  </a>
+</svg>"""
+encoded=SVGSTR.encode('utf-8')
+array=bytearray(encoded)
+img = QtGui.QImage.fromData(array, format="svg")
+
+file PNG
+---------------------------------------------------
+from PySide6 import QtGui 
+img = QtGui.QImage("test.png") 
+
+
+
+file SVG
+----------------------------------------------------
+from PySide6 import QtGui
+img = QtGui.QImage("test.svg")
+
+
+inline HTML
+-----------------------------------------------------
+"<p>Apollo astronauts:</p>\
+\
+<ul>\
+  <li>Neil Armstrong</li>\
+  <li>Alan Bean</li>\
+  <li>Peter Conrad</li>\
+  <li>Edgar Mitchell</li>\
+  <li>Alan Shepard</li>\
+</ul>"
+
+
+"<p>Apollo astronauts:ok</p>\
+\
+<ul>\
+  <li>Neil Armstrong</li>\
+  <li>Alan Bean</li>\
+  <li>Peter Conrad</li>\
+  <li>Edgar Mitchell</li>\
+  <li>Alan Shepard</li>\
+</ul>"
+

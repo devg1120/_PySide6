@@ -2684,6 +2684,7 @@ class TableChoice(QTabBar):
 
         self.currentChanged.connect(self.on_table_changed)
 
+
     @property
     def no_tables(self) -> int:
         """Returns the number of tables in the table_choice"""

@@ -1,0 +1,73 @@
+pyspread11 のみに存在: .grid.py.swp
+pyspread11 のみに存在: __pycache__
+diff -Bb -6 -u pyspread10/grid.py pyspread11/grid.py
+--- pyspread10/grid.py	2025-01-18 07:38:00.083725739 +0900
++++ pyspread11/grid.py	2025-01-18 07:38:00.308726938 +0900
+@@ -38,12 +38,13 @@
+ from contextlib import contextmanager
+ from datetime import datetime, date, time
+ from io import BytesIO
+ from typing import Any, Iterable, List, Tuple, Union
+ 
+ import numpy
++import inspect
+ 
+ from PySide6.QtWidgets \
+     import (QTableView, QStyledItemDelegate, QTabBar, QWidget, QMainWindow,
+             QStyleOptionViewItem, QApplication, QStyle, QAbstractItemDelegate,
+             QHeaderView, QFontDialog, QInputDialog, QLineEdit,QStyleOptionButton,
+             QAbstractItemView)
+@@ -235,12 +236,14 @@
+         #                 selection-background-color: #999;
+         #    }''') # for demo purposes
+     ## class QAbstractItemView
+ 
+     def commitData(self, editor):
+         print(self.name, "grid commitData")
++        #print(inspect.stack()[1].filename)
++        #print(inspect.stack()[1].function)
+         super().commitData(editor)
+ 
+     def dataChanged(self, topLeft, bottomRight, roles):
+         super().dataChanged(topLeft, bottomRight, roles)
+         cindex = self.currentIndex()
+         if  cindex.column() == topLeft.column() and  \
+@@ -517,15 +520,33 @@
+     # Overrides
+ 
+     def focusInEvent(self, event):
+         """Overrides focusInEvent storing last focused grid in main_window"""
+ 
+         self.main_window._last_focused_grid = self
++        #self.setStyleSheet('QTableView {border-width:3px; border-color: red;}')
++        #self.setStyleSheet("border-color: red;"
++        #        "border-width: 2px;")
++        self.setStyleSheet('''
++            QTableView { border: solid red;
++                         border-width: 3px ;
++            }''') # for demo purposes
++        self.gui_update()
+ 
+         super().focusInEvent(event)
+ 
++    def focusOutEvent(self, event):
++        #self.setStyleSheet('QTableView {border-width:None; }')
++        #self.setStyleSheet("border-color: red;"
++        #        "border-width: 0px;")
++        self.setStyleSheet('''
++            QTableView { border: solid red;
++                         border-width: 0px ;
++            }''') # for demo purposes
++        self.gui_update()
++
+     def closeEditor(self, editor: QWidget,
+                     hint: QAbstractItemDelegate.EndEditHint):
+         """Overrides QTableView.closeEditor
+ 
+         Changes to overridden behavior:
+          * Data is submitted when a cell is changed without pressing <Enter>
+共通のサブディレクトリー: pyspread10/interfaces と pyspread11/interfaces
+共通のサブディレクトリー: pyspread10/lib と pyspread11/lib
+共通のサブディレクトリー: pyspread10/model と pyspread11/model
+共通のサブディレクトリー: pyspread10/share と pyspread11/share
+共通のサブディレクトリー: pyspread10/test と pyspread11/test
