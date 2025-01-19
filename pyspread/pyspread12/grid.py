@@ -182,9 +182,10 @@ class Grid(Freeze_TableWidget):
         # Palette adjustment for cases in  which the Base color is not white
         # http://dorafop.my.coocan.jp/Qt/Qt105.html
         # 
-        #p = self.palette()
-        #p.setColor(QPalette.ColorRole.Base,
-        #                  QColor(*DefaultCellAttributeDict().bgcolor))
+        p = self.palette()
+        p.setColor(QPalette.ColorRole.Base,
+                          QColor(*DefaultCellAttributeDict().bgcolor))
+        self.setPalette(p)
 
         #p = self.palette()
         #p.setColor(QPalette.ColorRole.Base      , "#ffffff")
