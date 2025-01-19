@@ -1,4 +1,5 @@
-
+Safe mode activated. Code not executed.
+---------------------------------
 inline SVG
 ---------------------------------------------------
 from PySide6 import QtGui
@@ -11,7 +12,7 @@ encoded=SVGSTR.encode('utf-8')
 array=bytearray(encoded)
 img = QtGui.QImage.fromData(array, format="svg")
 
-
+---------------------------------------------------
 from PySide6 import QtGui
 SVGSTR="""<svg height="30" width="200" xmlns="http://www.w3.org/2000/svg">
   <a href="https://www.w3schools.com/graphics/" target="_blank">
@@ -47,14 +48,154 @@ inline HTML
   <li>Alan Shepard</li>\
 </ul>"
 
+-----------------------------------------------------
+Supported HTML Subset
+https://doc.qt.io/qt-5/richtext-html-subset.html
 
-"<p>Apollo astronauts:ok</p>\
-\
-<ul>\
-  <li>Neil Armstrong</li>\
-  <li>Alan Bean</li>\
-  <li>Peter Conrad</li>\
-  <li>Edgar Mitchell</li>\
-  <li>Alan Shepard</li>\
-</ul>"
+-----------------------------------------------------
+"""
+<table>
+  <tr>
+    <th>Company</th>
+    <th>Contact</th>
+    <th>Country</th>
+  </tr>
+  <tr>
+    <td>Alfreds Futterkiste</td>
+    <td>Maria Anders</td>
+    <td>Germany</td>
+  </tr>
+  <tr>
+    <td>Centro comercial Moctezuma</td>
+    <td>Francisco Chang</td>
+    <td>Mexico</td>
+  </tr>
+  <tr>
+    <td>Ernst Handel</td>
+    <td>Roland Mendel</td>
+    <td>Austria</td>
+  </tr>
+  <tr>
+    <td>Island Trading</td>
+    <td>Helen Bennett</td>
+    <td>UK</td>
+  </tr>
+  <tr>
+    <td>Laughing Bacchus Winecellars</td>
+    <td>Yoshi Tannamuri</td>
+    <td bgcolor="red" >Canada</td>
+  </tr>
+  <tr>
+    <td>Magazzini Alimentari Riuniti</td>
+    <td>Giovanni Rovelli</td>
+    <td>Italy</td>
+  </tr>
+</table>
+"""
 
+-----------------------------------------
+"""
+<h1 style="color:blue;">A Blue Heading</h1>
+<p style="color:red;">A red paragraph.</p>
+"""
+
+-----------------------------------------
+"""
+<style>
+  color:blue
+</style>
+
+<h1>A Blue Heading</h1>
+<p>A red paragraph.</p>
+"""
+
+-----------------------------------------
+
+"""
+<style>
+   td {
+      background-color: #D6EEEE;
+   }
+</style>
+<table>
+  <tr>
+    <th>Company</th>
+    <th>Contact</th>
+    <th>Country</th>
+  </tr>
+  <tr>
+    <td>Alfreds Futterkiste</td>
+    <td>Maria Anders</td>
+    <td>Germany</td>
+  </tr>
+  <tr>
+    <td>Centro comercial Moctezuma</td>
+    <td>Francisco Chang</td>
+    <td>Mexico</td>
+  </tr>
+  <tr>
+    <td>Ernst Handel</td>
+    <td>Roland Mendel</td>
+    <td >Austria</td>
+  </tr>
+</table>
+"""
+-----------------------------------------------
+
+from PySide6.QtGui import  QTextDocument
+html = "this is a red <h3>heading</h3>"
+doc = QTextDocument()
+doc.setHtml(html)
+doc.toHtml()
+
+-----------------------------------------------
+from PySide6.QtGui import  QTextDocument
+html = """
+<style>
+   td {
+      background-color: #D6EEEE;
+   }
+</style>
+<table>
+  <tr>
+    <th>Company</th>
+    <th>Contact</th>
+    <th>Country</th>
+  </tr>
+  <tr>
+    <td>Alfreds Futterkiste</td>
+    <td>Maria Anders</td>
+    <td>Germany</td>
+  </tr>
+  <tr>
+    <td>Centro comercial Moctezuma</td>
+    <td>Francisco Chang</td>
+    <td>Mexico</td>
+  </tr>
+  <tr>
+    <td>Ernst Handel</td>
+    <td>Roland Mendel</td>
+    <td bgcolor="red">Austria</td>
+  </tr>
+</table>
+"""
+doc = QTextDocument()
+doc.setHtml(html)
+doc.toHtml()
+
+-----------------------------------------------
+from PySide6.QtGui import  QTextDocument
+html = """
+<style>
+  h1 {color:blue}
+  p  {color:red}
+</style>
+
+<h1>A Blue Heading</h1>
+<p>A red paragraph.</p>
+"""
+doc = QTextDocument()
+doc.setHtml(html)
+doc.toHtml()
+
+-----------------------------------------------

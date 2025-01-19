@@ -1,0 +1,26 @@
+[Pyspread save file version]
+2.0
+[shape]
+1000	100	3
+[grid]
+5	3	0	'from PySide6 import QtGui\r\nimg = QtGui.QImage("test.png")\r\n  \r\n'
+5	2	0	'1'
+6	2	0	'2'
+7	2	0	'3'
+8	2	0	'4'
+6	3	0	'from PySide6 import QtGui\r\nSVGSTR="""<svg height="30" width="200" xmlns="http://www.w3.org/2000/svg">\r\n  <a href="https://www.w3schools.com/graphics/" target="_blank">\r\n    <text x="5" y="15" fill="red">I love SVG!</text>\r\n  </a>\r\n</svg>"""\r\nencoded=SVGSTR.encode(\'utf-8\')\r\narray=bytearray(encoded)\r\nimg = QtGui.QImage.fromData(array, format="svg")\r\n'
+7	3	0	'from PySide6.QtGui import  QTextDocument\r\nhtml = """\r\n<style>\r\n   td {\r\n      background-color: #D6EEEE;\r\n   }\r\n</style>\r\n<table>\r\n  <tr>\r\n    <th>Company</th>\r\n    <th>Contact</th>\r\n    <th>Country</th>\r\n  </tr>\r\n  <tr>\r\n    <td>Alfreds Futterkiste</td>\r\n    <td>Maria Anders</td>\r\n    <td>Germany</td>\r\n  </tr>\r\n  <tr>\r\n    <td>Centro comercial Moctezuma</td>\r\n    <td>Francisco Chang</td>\r\n    <td>Mexico</td>\r\n  </tr>\r\n  <tr>\r\n    <td>Ernst Handel</td>\r\n    <td>Roland Mendel</td>\r\n    <td bgcolor="red">Austria</td>\r\n  </tr>\r\n</table>\r\n"""\r\ndoc = QTextDocument()\r\ndoc.setHtml(html)\r\ndoc.toHtml()\r\n\r\n'
+10	3	0	'from PySide6.QtGui import  QTextDocument\r\nhtml = """\r\n<style>\r\n  h1 {color:blue}\r\n  p  {color:red}\r\n</style>\r\n\r\n<h1>A Blue Heading</h1>\r\n<p>A red paragraph.</p>\r\n"""\r\ndoc = QTextDocument()\r\ndoc.setHtml(html)\r\ndoc.toHtml()\r\n'
+[attributes]
+[]	[]	[]	[]	[(5, 3)]	0	'renderer'	'image'
+[]	[]	[]	[]	[(6, 3)]	0	'renderer'	'image'
+[]	[]	[]	[]	[(7, 3)]	0	'renderer'	'markup'
+[]	[]	[]	[]	[(10, 3)]	0	'renderer'	'markup'
+[row_heights]
+5	0	188.0
+7	0	253.0
+10	0	187.0
+6	0	93.0
+[col_widths]
+3	0	469.0
+[macros]

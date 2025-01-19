@@ -170,7 +170,8 @@ class MainWindow(QMainWindow):
         msg = f"{APP_NAME} is in safe mode.\nExpressions are not evaluated."
         self.safe_mode_widget.setToolTip(msg)
         self.statusBar().addPermanentWidget(self.safe_mode_widget)
-        self.safe_mode_widget.hide()
+        #self.safe_mode_widget.hide()
+        self.safe_mode_widget.show()
 
         # Selection mode widget
         self.selection_mode_widget = QSvgWidget(str(IconPath.selection_mode),

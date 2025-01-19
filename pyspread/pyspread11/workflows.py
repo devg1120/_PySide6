@@ -279,7 +279,7 @@ class Workflows:
         self.main_window.undo_stack.clear()
 
         # Reset macro editor
-        self.main_window.macro_panel.macro_editor.clear()
+        #GUSA self.main_window.macro_panel.macro_editor.clear()
 
         # Is the file signed properly ?
         self.main_window.safe_mode = True
@@ -381,7 +381,7 @@ class Workflows:
         self.main_window.settings.changed_since_save = False
 
         # Update macro editor
-        self.main_window.macro_panel.update()
+        #GUSA self.main_window.macro_panel.update()
 
         # Add to file history
         self.main_window.settings.add_to_file_history(filepath.as_posix())
