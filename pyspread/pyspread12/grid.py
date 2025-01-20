@@ -246,11 +246,11 @@ class Grid(Freeze_TableWidget):
 
     def dataChanged(self, topLeft, bottomRight, roles):
         super().dataChanged(topLeft, bottomRight, roles)
-        cindex = self.currentIndex()
-        if  cindex.column() == topLeft.column() and  \
-            cindex.row()    == topLeft.row():
-          e = QKeyEvent(QEvent.KeyPress, Qt.Key_Down , Qt.NoModifier)
-          QCoreApplication.postEvent(self, e)
+        #cindex = self.currentIndex()
+        #if  cindex.column() == topLeft.column() and  \
+        #    cindex.row()    == topLeft.row():
+        #  e = QKeyEvent(QEvent.KeyPress, Qt.Key_Down , Qt.NoModifier)
+        #  QCoreApplication.postEvent(self, e)
 
     def set_frozen(self):
         index = self.currentIndex()
