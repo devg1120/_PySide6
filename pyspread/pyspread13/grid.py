@@ -530,8 +530,8 @@ class Grid(Freeze_TableWidget):
         #self.setStyleSheet("border-color: red;"
         #        "border-width: 2px;")
         self.setStyleSheet('''
-            QTableView { border: solid red;
-                         border-width: 3px ;
+            QTableView { border: solid #0080ff;
+                         border-width: 1px ;
             }''') # for demo purposes
         self.gui_update()
 
@@ -2820,8 +2820,11 @@ class TableChoice(QTabBar):
         :param value: Number of the table
 
         """
-
         self.setCurrentIndex(value)
+        self.setTabTextColor(value, Qt.red)
+        for i in range(self.no_tables):
+            if i != value:
+                self.setTabTextColor(i, Qt.white)
 
     # Overrides
 

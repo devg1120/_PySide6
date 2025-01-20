@@ -5,3 +5,40 @@ main_waindow.py
 --- comment out delete
 self.central_layout.addWidget(self.grid.table_choice)
 
+### TABLE TAB SELECT RED COLOR
+grid.py
+
+class TableChoice(QTabBar):
+
+    @table.setter
+    def table(self, value: int):
+        """Sets a new table to be displayed
+
+        :param value: Number of the table
+
+        """
+        self.setCurrentIndex(value)
+        self.setTabTextColor(value, Qt.red)
+        for i in range(self.no_tables):
+            if i != value:
+                self.setTabTextColor(i, Qt.white)
+
+###  VIEW SELECT
+#
+grid.py
+
+    def focusInEvent(self, event):
+        """Overrides focusInEvent storing last focused grid in main_window"""
+
+        self.main_window._last_focused_grid = self
+        #self.setStyleSheet('QTableView {border-width:3px; border-color: red;}')
+        #self.setStyleSheet("border-color: red;"
+        #        "border-width: 2px;")
+        self.setStyleSheet('''
+            QTableView { border: solid #0080ff;
+                         border-width: 1px ;
+            }''') # for demo purposes
+        self.gui_update()
+
+        super().focusInEvent(event)
+
