@@ -1,0 +1,21 @@
+[Pyspread save file version]
+2.0
+[shape]
+1000	100	3
+[grid]
+2	2	0	'from PySide6 import QtGui\nSVGSTR="""<svg height="30" width="200" xmlns="http://www.w3.org/2000/svg">\n  <a href="https://www.w3schools.com/graphics/" target="_blank">\n    <text x="5" y="15" fill="red">I love SVG!</text>\n  </a>\n</svg>"""\nencoded=SVGSTR.encode(\'utf-8\')\narray=bytearray(encoded)\nimg = QtGui.QImage.fromData(array, format="svg")'
+2	3	0	'from PySide6.QtGui import  QTextDocument\nhtml = """\n<style>\n  h1 {color:blue}\n  p  {color:red}\n</style>\n\n<h1>A Blue Heading</h1>\n<p>A red paragraph.</p>\n"""\ndoc = QTextDocument()\ndoc.setHtml(html)\ndoc.toHtml()'
+0	1	0	'1'
+1	1	0	'2'
+2	1	0	'3'
+0	0	0	'"A"'
+1	0	0	'"B"'
+2	0	0	'"C"'
+[attributes]
+[]	[]	[]	[]	[(2, 2)]	0	'renderer'	'image'
+[]	[]	[]	[]	[(2, 3)]	0	'renderer'	'markup'
+[row_heights]
+2	0	189.0
+[col_widths]
+3	0	217.0
+[macros]

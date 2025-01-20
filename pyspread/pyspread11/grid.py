@@ -267,7 +267,7 @@ class Grid(Freeze_TableWidget):
 
  
     def currentChanged(self, current, previous):
-        #super().currentChanged( current, previous)
+        super().currentChanged( current, previous)
         pass
 
 

@@ -246,6 +246,8 @@ class Grid(Freeze_TableWidget):
 
     def dataChanged(self, topLeft, bottomRight, roles):
         super().dataChanged(topLeft, bottomRight, roles)
+
+        # GUSA 
         #cindex = self.currentIndex()
         #if  cindex.column() == topLeft.column() and  \
         #    cindex.row()    == topLeft.row():
@@ -268,7 +270,7 @@ class Grid(Freeze_TableWidget):
 
  
     def currentChanged(self, current, previous):
-        #super().currentChanged( current, previous)
+        super().currentChanged( current, previous)
         pass
 
 
@@ -660,9 +662,9 @@ class Grid(Freeze_TableWidget):
 
     def update_zoom(self):
         """Updates the zoom level visualization to the current zoom factor"""
-
-        self.verticalHeader().update_zoom()
-        self.horizontalHeader().update_zoom()
+        pass
+        #self.verticalHeader().update_zoom()
+        #self.horizontalHeader().update_zoom()
 
     def has_selection(self) -> bool:
         """Returns True if more than one cell is selected, else False

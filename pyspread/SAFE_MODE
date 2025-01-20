@@ -1,0 +1,19 @@
+model.py
+
+under comment out
+--------------------------
+model.py
+1491         #GUSA
+1492         #if self.safe_mode:
+1493         #    # Safe mode is active
+1494         #    return code
+
+
+
+
+[~/_py/_PySide6/pyspread/pyspread] grep -rn  "safe_mode = True" .
+./test/test_pyspread.py:81:        main_window.safe_mode = True
+./workflows.py:285:        self.main_window.safe_mode = True
+./workflows.py:295:            self.main_window.safe_mode = True
+
+

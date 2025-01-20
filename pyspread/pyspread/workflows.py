@@ -292,7 +292,7 @@ class Workflows:
                                                             sigfile.read(),
                                                             signature_key)
         except OSError:
-            self.main_window.safe_mode = True
+           self.main_window.safe_mode = True
 
         # File format handling
         if filepath.suffix == ".pysu":

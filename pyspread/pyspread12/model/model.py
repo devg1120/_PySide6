@@ -1488,9 +1488,9 @@ class CodeArray(DataArray):
                     'R': key[0], 'C': key[1], 'T': key[2], 'S': self}
         env = self._get_updated_environment(env_dict=env_dict)
 
-        if self.safe_mode:
-            # Safe mode is active
-            return code
+        #GUSA if self.safe_mode:
+        #    # Safe mode is active
+        #    return code
 
         if code is None:
             # Cell is not present
