@@ -1,0 +1,7 @@
+### MULTI TABLE
+
+main_waindow.py
+
+--- comment out delete
+self.central_layout.addWidget(self.grid.table_choice)
+

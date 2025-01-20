@@ -1,0 +1,14 @@
+[Pyspread save file version]
+2.0
+[shape]
+1000	100	3
+[grid]
+2	1	0	'import matplotlib.pyplot as plt\n\nfig = plt.figure()  # Figureオブジェクトを作成\nax = fig.subplots()  # Axesオブジェクトを作成\nax.plot([1, 2, 3, 4], [0, 0.5, 1, 0.2])  # データをプロ\n\nfig'
+[attributes]
+[]	[]	[]	[]	[(2, 1)]	0	'merge_area'	(2, 1, 12, 4)
+[(2, 1)]	[(12, 4)]	[]	[]	[]	0	'renderer'	'matplotlib'
+[]	[]	[]	[]	[(2, 1)]	0	'renderer'	'matplotlib'
+[]	[]	[]	[]	[(0, 0)]	0	'bgcolor'	(0, 255, 0, 255)
+[row_heights]
+[col_widths]
+[macros]

@@ -1,0 +1,21 @@
+[Pyspread save file version]
+2.0
+[shape]
+1000	100	3
+[grid]
+0	0	2	'2'
+0	0	1	'1'
+0	0	0	'0'
+0	2	2	'"B"'
+8	2	2	'"PAGE2"'
+3	1	1	'"PAGE1"'
+[attributes]
+[(4, 2)]	[(6, 3)]	[]	[]	[]	2	'bordercolor_bottom'	(255, 0, 0, 255)
+[(5, 1)]	[(6, 3)]	[]	[]	[]	2	'bordercolor_right'	(255, 0, 0, 255)
+[]	[]	[]	[]	[(3, 1)]	1	'bgcolor'	(255, 255, 0, 255)
+[]	[]	[]	[]	[(8, 2)]	2	'merge_area'	(8, 2, 9, 3)	'bgcolor'	(85, 170, 255, 255)
+[]	[]	[]	[]	[(2, 1)]	0	'merge_area'	(2, 1, 8, 4)
+[(8, 2)]	[(9, 3)]	[]	[]	[]	2	'textcolor'	(255, 0, 0, 255)
+[row_heights]
+[col_widths]
+[macros]

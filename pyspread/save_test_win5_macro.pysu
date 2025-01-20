@@ -1,0 +1,20 @@
+[Pyspread save file version]
+2.0
+[shape]
+1000	100	3
+[grid]
+3	1	0	'f()'
+0	0	0	'"A"'
+1	0	0	'"B"'
+7	2	0	'f()'
+[attributes]
+[]	[]	[]	[]	[(0, 0)]	0	'textcolor'	(255, 0, 0, 255)
+[]	[]	[]	[]	[(7, 2)]	0	'bgcolor'	(255, 255, 127, 255)
+[row_heights]
+[col_widths]
+[macros]
+def f():
+   return "Hello  gusa!"
+
+
+print(f())
