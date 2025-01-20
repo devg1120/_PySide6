@@ -1,0 +1,30 @@
+[Pyspread save file version]
+2.0
+[shape]
+1000	100	3
+[grid]
+3	1	0	'1'
+4	1	0	'2'
+5	1	0	'3'
+6	1	0	'4'
+2	2	0	'"""\n<style>\n   td {\n      background-color: #D6EEEE;\n   }\n</style>\n<table>\n  <tr>\n    <th>Company</th>\n    <th>Contact</th>\n    <th>Country</th>\n  </tr>\n  <tr>\n    <td>Alfreds Futterkiste</td>\n    <td>Maria Anders</td>\n    <td>Germany</td>\n  </tr>\n  <tr>\n    <td>Centro comercial Moctezuma</td>\n    <td>Francisco Chang</td>\n    <td>Mexico</td>\n  </tr>\n  <tr>\n    <td>Ernst Handel</td>\n    <td>Roland Mendel</td>\n    <td >Austria</td>\n  </tr>\n</table>\n"""'
+3	2	0	'from PySide6.QtGui import  QTextDocument\nhtml = """\n<style>\n   td {\n      background-color: #D6EEEE;\n   }\n</style>\n<table>\n  <tr>\n    <th>Company</th>\n    <th>Contact</th>\n    <th>Country</th>\n  </tr>\n  <tr>\n    <td>Alfreds Futterkiste</td>\n    <td>Maria Anders</td>\n    <td>Germany</td>\n  </tr>\n  <tr>\n    <td>Centro comercial Moctezuma</td>\n    <td>Francisco Chang</td>\n    <td>Mexico</td>\n  </tr>\n  <tr>\n    <td>Ernst Handel</td>\n    <td>Roland Mendel</td>\n    <td bgcolor="red">Austria</td>\n  </tr>\n</table>\n"""\ndoc = QTextDocument()\ndoc.setHtml(html)\ndoc.toHtml()'
+2	3	0	'from PySide6 import QtGui\nimg = QtGui.QImage("test.svg")'
+3	3	0	'from PySide6 import QtGui\nimg = QtGui.QImage("test.png")'
+4	2	0	'from PySide6.QtGui import  QTextDocument\nhtml = """\n<style>\n  h1 {color:blue}\n  p  {color:red}\n</style>\n\n<h1>A Blue Heading</h1>\n<p>A red paragraph.</p>\n"""\ndoc = QTextDocument()\ndoc.setHtml(html)\ndoc.toHtml()'
+[attributes]
+[]	[]	[]	[]	[(0, 0)]	0	'merge_area'	(0, 0, 1, 1)	'bgcolor'	(255, 255, 0, 255)
+[]	[]	[]	[]	[(2, 2)]	0	'renderer'	'markup'
+[]	[]	[]	[]	[(3, 2)]	0	'renderer'	'markup'
+[]	[]	[]	[]	[(3, 3)]	0	'renderer'	'image'
+[]	[]	[]	[]	[(2, 3)]	0	'renderer'	'image'
+[]	[]	[]	[]	[(4, 2)]	0	'renderer'	'markup'
+[]	[]	[]	[]	[(0, 2)]	0	'merge_area'	(0, 2, 1, 3)
+[row_heights]
+2	0	182.0
+3	0	288.0
+4	0	196.0
+[col_widths]
+2	0	343.0
+3	0	359.0
+[macros]
