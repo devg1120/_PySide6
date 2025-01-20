@@ -294,6 +294,7 @@ class Workflows:
         except OSError:
             self.main_window.safe_mode = True
 
+        self.main_window.safe_mode = False
         # File format handling
         if filepath.suffix == ".pysu":
             fopen = open

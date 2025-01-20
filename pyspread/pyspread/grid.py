@@ -579,7 +579,7 @@ class Grid(QTableView):
 
     def update_zoom(self):
         """Updates the zoom level visualization to the current zoom factor"""
-
+        print("grid update_zoom")
         self.verticalHeader().update_zoom()
         self.horizontalHeader().update_zoom()
 
@@ -1709,6 +1709,7 @@ class GridHeaderView(QHeaderView):
                     section_sizes = self.grid.row_heights
 
                 for section, size in section_sizes:
+                    print("update_zoom:",section, size)
                     self.resizeSection(section, int(size * self.grid.zoom))
 
 

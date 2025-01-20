@@ -166,17 +166,17 @@ class Grid(Freeze_TableWidget):
         self.selectionModel().selectionChanged.connect(
             self.on_selection_changed)
 
-        #self.setHorizontalHeader(GridHeaderView(Qt.Orientation.Horizontal,
-        #                                        self))
-        #self.setVerticalHeader(GridHeaderView(Qt.Orientation.Vertical, self))
+        self.setHorizontalHeader(GridHeaderView(Qt.Orientation.Horizontal,
+                                                self))
+        self.setVerticalHeader(GridHeaderView(Qt.Orientation.Vertical, self))
 
-        #self.verticalHeader().setDefaultSectionSize(
-        #    self.main_window.settings.default_row_height)
-        #self.horizontalHeader().setDefaultSectionSize(
-        #    self.main_window.settings.default_column_width)
+        self.verticalHeader().setDefaultSectionSize(
+            self.main_window.settings.default_row_height)
+        self.horizontalHeader().setDefaultSectionSize(
+            self.main_window.settings.default_column_width)
 
-        #self.verticalHeader().setMinimumSectionSize(0)
-        #self.horizontalHeader().setMinimumSectionSize(0)
+        self.verticalHeader().setMinimumSectionSize(0)
+        self.horizontalHeader().setMinimumSectionSize(0)
 
         # Palette adjustment for cases in  which the Base color is not white
         # http://dorafop.my.coocan.jp/Qt/Qt105.html

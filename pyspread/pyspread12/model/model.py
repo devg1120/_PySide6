@@ -1491,6 +1491,9 @@ class CodeArray(DataArray):
         #GUSA if self.safe_mode:
         #    # Safe mode is active
         #    return code
+        if self.safe_mode:
+            # Safe mode is active
+            return code
 
         if code is None:
             # Cell is not present

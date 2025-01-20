@@ -1,8 +1,17 @@
+workflow.py  OR  model.py
+###################################################
+workflow.py
+
+def filepath_open(self, filepath: Path):
+
+297 self.main_window.safe_mode = False
+
+
+###################################################
 model.py
 
-under comment out
---------------------------
-model.py
+def _eval_cell(self, key: Tuple[int, int, int], code: str) -> Any:
+
 1491         #GUSA
 1492         #if self.safe_mode:
 1493         #    # Safe mode is active
@@ -11,9 +20,5 @@ model.py
 
 
 
-[~/_py/_PySide6/pyspread/pyspread] grep -rn  "safe_mode = True" .
-./test/test_pyspread.py:81:        main_window.safe_mode = True
-./workflows.py:285:        self.main_window.safe_mode = True
-./workflows.py:295:            self.main_window.safe_mode = True
 
 

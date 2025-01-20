@@ -279,7 +279,7 @@ class Workflows:
         self.main_window.undo_stack.clear()
 
         # Reset macro editor
-        self.main_window.macro_panel.macro_editor.clear()
+        #self.main_window.macro_panel.macro_editor.clear()
 
         # Is the file signed properly ?
         self.main_window.safe_mode = True
